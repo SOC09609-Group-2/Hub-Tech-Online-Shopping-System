@@ -26,4 +26,8 @@ public class SubCategoryService {
 	public void delete(int id) {
         subCategoryDAO.delete(id);
 	}
+
+//	public SubCategory reterieve_sc(int id){
+//		return subCategoryDAO.reterieve_sc(id);
+//	}
 }

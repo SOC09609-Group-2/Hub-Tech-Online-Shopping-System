@@ -22,4 +22,9 @@ public class SubCategoryDAO {
 	}
 
 	public void delete(int id) { subCategoryRepository.deleteById(id); }
+
+//	public SubCategory reterieve_sc(int id){
+//		return subCategoryRepository.findByMain_category_id(id);
+//	}
+
 }

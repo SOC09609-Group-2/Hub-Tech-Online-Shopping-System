@@ -10,8 +10,14 @@ public class SubCategory implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private int maincategoryid;
+    private int main_category_id;
     private String slug;
+    private String updated_at;
+    private String created_at;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public int getId() {
         return id;
@@ -29,6 +35,14 @@ public class SubCategory implements Serializable {
         this.name = name;
     }
 
+    public int getMain_category_id() {
+        return main_category_id;
+    }
+
+    public void setMain_category_id(int main_category_id) {
+        this.main_category_id = main_category_id;
+    }
+
     public String getSlug() {
         return slug;
     }
@@ -37,13 +51,19 @@ public class SubCategory implements Serializable {
         this.slug = slug;
     }
 
-    public int getMaincategoryid() {
-        return maincategoryid;
+    public String getUpdated_at() {
+        return updated_at;
     }
 
-    public void setMaincategoryid(int maincategoryid) { this.maincategoryid = maincategoryid; }
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
+    }
 
+    public String getCreated_at() {
+        return created_at;
+    }
 
-
-
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
 }

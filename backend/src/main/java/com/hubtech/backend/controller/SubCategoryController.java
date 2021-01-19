@@ -46,4 +46,11 @@ public class SubCategoryController {
 				.body(new Response(true, new Date()));
 	}
 
+//	@PostMapping("/{reterieve_sc}")
+//	public ResponseEntity<Response> retrieveSCbyMC(@RequestBody SubCategory subCategory) {
+//		int mc_id = subCategory.getMain_category_id();
+//		return ResponseEntity.status(HttpStatus.OK)
+//				.body(new Response(subCategoryService.reterieve_sc(mc_id), new Date()));
+//	}
+
 }
