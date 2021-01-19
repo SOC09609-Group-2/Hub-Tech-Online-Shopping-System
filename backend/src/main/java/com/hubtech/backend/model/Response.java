@@ -14,7 +14,8 @@ public class Response {
 		this.date = date;
 	}
 
-	public Object getData() {
+
+    public Object getData() {
 		return data;
 	}
 
