@@ -51,24 +51,9 @@ public class UserController {
 	@PostMapping("/{login}")
     public ResponseEntity<Response> login(@RequestBody User user) {
 	    String email = user.getEmail();
-	    String password = getSHA512(user.getPassword());
+	    String password = user.getPassword();
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new Response(userService.login(email,password), new Date()));
     }
-
-
-    public static String getSHA512(String input){
-        String toReturn = null;
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-512");
-            digest.reset();
-            digest.update(input.getBytes("utf8"));
-            toReturn = String.format("%0128x", new BigInteger(1, digest.digest()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return toReturn;
-    }
-
 
 }

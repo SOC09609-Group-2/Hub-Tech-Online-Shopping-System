@@ -1,6 +1,8 @@
 package com.hubtech.backend.entity;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 
 @Entity
 @Table(name = "users")
@@ -120,7 +122,7 @@ public class User implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = getSHA512(password);
     }
 
     public String getUpdated_at() {
@@ -138,4 +140,18 @@ public class User implements Serializable {
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
     }
+
+    public static String getSHA512(String input){
+        String toReturn = null;
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-512");
+            digest.reset();
+            digest.update(input.getBytes("utf8"));
+            toReturn = String.format("%0128x", new BigInteger(1, digest.digest()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return toReturn;
+    }
+
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SubCategoryService {
@@ -15,8 +16,8 @@ public class SubCategoryService {
 	@Autowired
 	private SubCategoryDAO subCategoryDAO;
 
-	public List<SubCategory> get() {
-		return subCategoryDAO.get();
+	public List<SubCategory> get(int mcatID) {
+		return subCategoryDAO.get(mcatID);
 	}
 
 	public SubCategory save(SubCategory subCategory) {
@@ -27,7 +28,7 @@ public class SubCategoryService {
         subCategoryDAO.delete(id);
 	}
 
-//	public SubCategory reterieve_sc(int id){
-//		return subCategoryDAO.reterieve_sc(id);
-//	}
+    public Optional<SubCategory> getById(int id) {
+        return subCategoryDAO.getById(id);
+    }
 }

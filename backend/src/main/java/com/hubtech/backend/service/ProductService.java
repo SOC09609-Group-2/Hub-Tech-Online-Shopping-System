@@ -27,4 +27,8 @@ public class ProductService {
     public void delete(int id) {
         productDAO.delete(id);
     }
+
+    public List<Product> getBySlug(String slug) {
+        return productDAO.getBySlug(slug);
+    }
 }
