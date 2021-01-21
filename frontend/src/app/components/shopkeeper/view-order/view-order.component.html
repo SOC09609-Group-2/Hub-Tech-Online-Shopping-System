@@ -1,0 +1,51 @@
+<br><br>
+<div class="container mt-5">
+  <h1 class="text-center text-primary font-weight-bold" style="font-size: 38px">View Orders</h1>
+  <br>
+  <div class="md-form">
+    <input type="date" id="date" (change)="viewOrder($event)" value="{{cYM}}" class="form-control" mdbInput>
+    <label for="date">Choice Date</label>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table id="tableSortExample" mdbTable class="z-depth-1 bg-white">
+        <thead >
+        <tr>
+          <th><strong>ID</strong></th>
+          <th><strong>Customer Email</strong></th>
+          <th><strong>Product Name</strong></th>
+          <th><strong>Quantity</strong></th>
+          <th><strong>Order Date</strong></th>
+        </tr>
+        </thead>
+        <tbody #row>
+        <tr mdbTableCol *ngFor="let orderData of orderDatas$ | async |paginate: {
+                                                      itemsPerPage: 5,
+                                                      currentPage: p }; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{orderData.email}}</td>
+          <td>{{orderData.product_name}}</td>
+          <td>{{orderData.qty}}</td>
+          <td>{{dateFormat(orderData.date)}}</td>
+        </tr>
+        </tbody>
+        <tfoot class="lighten-5 w-00">
+        <tr>
+          <td colspan="6" align="center">
+            <pagination-controls
+              maxSize="5"
+              directionLinks="true"
+              responsive="true"
+              previousLabel="Previous"
+              nextLabel="Next"
+              (pageChange)="p = $event">
+
+            </pagination-controls>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+
+    </div>
+  </div>
+</div>

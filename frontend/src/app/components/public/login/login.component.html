@@ -10,27 +10,39 @@
         <!--Card content-->
         <div class="card-body px-lg-5">
 
-          <form class="text-center" style="color: #757575;" >
+          <form class="text-center" style="color: #757575;" #logForm="ngForm"
+                (ngSubmit)="logForm.form.valid && login(logForm.value)" novalidate>
 
             <div class="md-form form-sm mt-3">
 
-              <input mdbInput type="email" id="form2" class="form-control form-control-sm" name="email" ngModel>
+              <input mdbInput mdbValidate  type="email" id="form2" class="form-control form-control-sm" [(ngModel)]="userValidation.email" name="email"
+                     #email="ngModel" required email ngModel>
               <label for="form2" class="">Email</label>
-              <mdb-error >
-                <span>Error</span>
+              <mdb-error>
+   <span class="text-danger"
+         *ngIf="(email.touched || logForm.submitted) && email.errors?.required">
+                                Email is required
+                            </span>
+                <span class="text-danger" *ngIf="email.touched && email.errors?.email">
+                                Enter a valid email address
+                            </span>
               </mdb-error>
             </div>
 
             <div class="md-form form-sm mt-3">
-              <input mdbInput type="password" id="form6" class="form-control form-control-sm" name="password" ngModel>
+              <input mdbInput mdbValidate type="password" id="form6" class="form-control form-control-sm" [(ngModel)]="userValidation.password" name="password"
+                     #password="ngModel" appPasswordPattern required ngModel>
               <label for="form6" class="">Password</label>
-              <mdb-error>
-                <span>Error</span>
+              <mdb-error >
+ <span class="text-danger"
+       *ngIf="(password.touched || logForm.submitted) && password.errors?.required">
+                                Password is required
+                            </span>
+
               </mdb-error>
             </div>
 
-
-            <button type="reset" class="float-left" mdbBtn color="warning" mdbWavesEffect>Reset</button>
+            <button type="reset" (click)="auth.logout()" class="float-left" mdbBtn color="warning" mdbWavesEffect>Reset</button>
             <button type="submit" class="float-right" mdbBtn color="primary" mdbWavesEffect>Sing In</button>
 
           </form>
@@ -43,4 +55,8 @@
     <div class="col-md-2"></div>
   </div>
 </div>
+
+
+
+
 <br><br>

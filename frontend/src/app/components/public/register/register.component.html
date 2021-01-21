@@ -1,60 +1,45 @@
 <br><br><br>
 <div class="container mt-5" >
 
- <div class="row">
-   <div class="col-md-2"></div>
-  <div class="col-md-8">
-  <h2 align="center" *ngIf="isCustomer" class="text-primary font-weight-bold" style="font-family: 'Times New Roman'">Register As a Customer</h2>
-  <h2 align="center" *ngIf="!isCustomer" class="text-primary font-weight-bold" style="font-family: 'Times New Roman'">Register As a Shopkeeper</h2>
-    <div class="card z-depth-5 mt-4">
-    <button *ngIf="isCustomer" type="button" (click)="choiceRole('shopkeeper')" mdbBtn color="success" mdbWavesEffect>Sing up As a Shopkeeper</button>
-    <button *ngIf="!isCustomer" type="button" (click)="choiceRole('customer')" mdbBtn color="success" mdbWavesEffect>Sing up As a Customer</button>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <h2 align="center" *ngIf="isCustomer" class="text-primary font-weight-bold" style="font-family: 'Times New Roman'">Register As a Customer</h2>
+      <h2 align="center" *ngIf="!isCustomer" class="text-primary font-weight-bold" style="font-family: 'Times New Roman'">Register As a Shopkeeper</h2>
+      <div class="card z-depth-5 mt-4">
+        <button *ngIf="isCustomer" type="button" (click)="choiceRole('shopkeeper')" mdbBtn color="success" mdbWavesEffect>Sing up As a Shopkeeper</button>
+        <button *ngIf="!isCustomer" type="button" (click)="choiceRole('customer')" mdbBtn color="success" mdbWavesEffect>Sing up As a Customer</button>
 
-      <!--Card content-->
-      <div class="card-body px-lg-5">
+        <!--Card content-->
+        <div class="card-body px-lg-5">
 
-        <form  *ngIf="isCustomer" class="text-center" style="color: #757575;" >
+          <form #regForm="ngForm" *ngIf="isCustomer" class="text-center" style="color: #757575;" (ngSubmit)="register(image, regForm, regForm.value, 'customer')">
 
-          <div class="md-form form-sm mt-3">
+            <div class="md-form form-sm mt-3">
 
-            <input mdbInput type="email" id="form1" class="form-control form-control-sm" name="name" ngModel>
-            <label for="form1" class="">Name</label>
-            <mdb-error >
-              <span>Error</span>
-            </mdb-error>
-          </div>
+              <input mdbInput type="email" id="form1" class="form-control form-control-sm" name="name" ngModel>
+              <label for="form1" class="">Name</label>
+            </div>
 
-          <div class="md-form form-sm mt-3">
+            <div class="md-form form-sm mt-3">
 
-            <input mdbInput type="email" id="form2" class="form-control form-control-sm" name="email" ngModel>
-            <label for="form2" class="">Email</label>
-            <mdb-error >
-              <span>Error</span>
-            </mdb-error>
-          </div>
+              <input mdbInput type="email" id="form2" class="form-control form-control-sm" name="email" ngModel>
+              <label for="form2" class="">Email</label>
+            </div>
 
-          <div class="md-form form-sm mt-3">
-            <input mdbInput type="email" id="form3" class="form-control form-control-sm" name="address" ngModel>
-            <label for="form3" class="">Address</label>
-            <mdb-error >
-              <span>Error</span>
-            </mdb-error>
-          </div>
+            <div class="md-form form-sm mt-3">
+              <input mdbInput type="email" id="form3" class="form-control form-control-sm" name="address" ngModel>
+              <label for="form3" class="">Address</label>
+            </div>
 
-          <div class="md-form form-sm mt-3">
-            <input mdbInput type="date" id="form8" class="form-control form-control-sm" name="dob" ngModel>
-            <label for="form8" class="">Date of Birth</label>
-            <mdb-error >
-              <span>Error</span>
-            </mdb-error>
-          </div>
+            <div class="md-form form-sm mt-3">
+              <input mdbInput type="date" id="form8" class="form-control form-control-sm" name="dob" ngModel>
+              <label for="form8" class="">Date of Birth</label>
+            </div>
 
             <div class="custom-control custom-radio custom-control-inline">
               <input type="radio" value="male" class="custom-control-input" id="defaultInline1" name="gender" ngModel  mdbInput>
               <label class="custom-control-label" for="defaultInline1">Male</label>
-              <mdb-error  style="margin-top: -15px;width: 140px">
-                <span>Error</span>
-              </mdb-error>
             </div>
 
             <!-- Default inline 2-->
@@ -63,114 +48,91 @@
               <label class="custom-control-label" for="defaultInline2">Female</label>
             </div>
 
-          <div class="md-form form-sm ">
-            <input #image mdbInput type="file" id="form5" class="form-control form-control-sm" name="image_name" ngModel>
-            <mdb-error >
-              <span>Error</span>
-            </mdb-error>
-          </div>
+            <div class="md-form form-sm ">
+              <input #image mdbInput type="file" id="form5" class="form-control form-control-sm" (change)="onFileSeletected($event)" name="image_name" ngModel>
+            </div>
 
-          <div class="md-form form-sm mt-3">
-            <input mdbInput type="password" id="form6" class="form-control form-control-sm" name="password" ngModel>
-            <label for="form6" class="">Password</label>
-            <mdb-error >
-              <span>Error</span>
-            </mdb-error>
-          </div>
+            <div class="md-form form-sm mt-3">
+              <input mdbInput type="password" id="form6" class="form-control form-control-sm" name="password" ngModel>
+              <label for="form6" class="">Password</label>
+            </div>
 
-          <div class="md-form form-sm mt-3">
-            <input mdbInput type="password" id="form7" class="form-control form-control-sm" name="con_password" ngModel>
-            <label for="form7" class="">Confirmation Password</label>
-            <mdb-error >
-              <span>Error</span>
-            </mdb-error>
-          </div>
+            <div class="md-form form-sm mt-3">
+              <input mdbInput type="password" id="form7" class="form-control form-control-sm" name="con_password" ngModel>
+              <label for="form7" class="">Confirmation Password</label>
+            </div>
 
-          <button type="reset" class="float-left" mdbBtn color="warning" mdbWavesEffect>Reset</button>
-          <button type="submit" class="float-right" mdbBtn color="primary" mdbWavesEffect>Sing up</button>
+            <button type="reset" class="float-left" mdbBtn color="warning" mdbWavesEffect>Reset</button>
+            <button type="submit" class="float-right" mdbBtn color="primary" mdbWavesEffect>Sing up</button>
 
-        </form>
-        <!-- Form -->
+          </form>
+          <!-- Form -->
 
 
-        <form  *ngIf="!isCustomer" class="text-center" style="color: #757575;" >
+          <form #regForm="ngForm" *ngIf="!isCustomer" class="text-center" style="color: #757575;" (ngSubmit)="register(image, regForm, regForm.value, 'shopkeeper')">
 
-          <!-- Name -->
-          <div class="md-form form-sm mt-3">
-
-
-            <input mdbInput type="email" id="form10" class="form-control form-control-sm" name="name" ngModel>
-            <label for="form10" class="">Name</label>
-            <mdb-error >
-              <span>Error</span>
-            </mdb-error>
-          </div>
-
-          <!-- E-mai -->
-          <div class="md-form form-sm mt-3">
-
-            <input mdbInput type="email" id="form11" class="form-control form-control-sm" name="email" ngModel>
-            <label for="form11" class="">Email</label>
-            <mdb-error >
-              <span>Error</span>
-            </mdb-error>
-          </div>
-
-          <!-- E-mai -->
-          <div class="md-form form-sm mt-3">
-            <input mdbInput type="text" id="form12" class="form-control form-control-sm" name="address" ngModel>
-            <label for="form12" class="">Shop Address</label>
-            <mdb-error >
-              <span>Error</span>
-            </mdb-error>
-          </div>
+            <!-- Name -->
+            <div class="md-form form-sm mt-3">
 
 
-          <!-- E-mai -->
-          <div class="md-form form-sm ">
-            <input mdbInput #image type="file" id="form13" class="form-control form-control-sm" name="image_name" ngModel>
-            <mdb-error >
-              <span>Error</span>
-            </mdb-error>
-          </div>
-          <div class="md-form form-sm mt-3">
-            <input mdbInput type="text" id="form16" class="form-control form-control-sm" name="shop_name" ngModel>
-            <label for="form16" class="">Shop Name</label>
-            <mdb-error >
-              <span>Error</span>
-            </mdb-error>
-          </div>
+              <input mdbInput type="email" id="form10" class="form-control form-control-sm" name="name" ngModel>
+              <label for="form10" class="">Name</label>
 
-          <div class="md-form form-sm mt-3">
-            <input mdbInput type="password" id="form14" class="form-control form-control-sm" name="password" ngModel>
-            <label for="form14" class="">Password</label>
-            <mdb-error >
-              <span>Error</span>
-            </mdb-error>
-          </div>
+            </div>
 
-          <div class="md-form form-sm mt-3">
-            <input mdbInput type="password" id="form15" class="form-control form-control-sm" name="con_password" ngModel>
-            <label for="form15" class="">Confirmation Password</label>
-            <mdb-error >
-              <span>Error</span>
-            </mdb-error>
-          </div>
+            <!-- E-mai -->
+            <div class="md-form form-sm mt-3">
+
+              <input mdbInput type="email" id="form11" class="form-control form-control-sm" name="email" ngModel>
+              <label for="form11" class="">Email</label>
+
+            </div>
+
+            <!-- E-mai -->
+            <div class="md-form form-sm mt-3">
+              <input mdbInput type="text" id="form12" class="form-control form-control-sm" name="address" ngModel>
+              <label for="form12" class="">Shop Address</label>
+
+            </div>
+
+
+            <!-- E-mai -->
+            <div class="md-form form-sm ">
+              <input mdbInput #image type="file" id="form13" class="form-control form-control-sm" (change)="onFileSeletected($event)" name="image_name" ngModel>
+
+            </div>
+            <div class="md-form form-sm mt-3">
+              <input mdbInput type="text" id="form16" class="form-control form-control-sm" name="shop_name" ngModel>
+              <label for="form16" class="">Shop Name</label>
+
+            </div>
+
+            <div class="md-form form-sm mt-3">
+              <input mdbInput type="password" id="form14" class="form-control form-control-sm" name="password" ngModel>
+              <label for="form14" class="">Password</label>
+
+            </div>
+
+            <div class="md-form form-sm mt-3">
+              <input mdbInput type="password" id="form15" class="form-control form-control-sm" name="con_password" ngModel>
+              <label for="form15" class="">Confirmation Password</label>
+
+            </div>
 
 
 
-          <button type="reset" class="float-left" mdbBtn color="warning" mdbWavesEffect>Reset</button>
-          <button type="submit" class="float-right" mdbBtn color="primary" mdbWavesEffect>Sing up</button>
+            <button type="reset" class="float-left" mdbBtn color="warning" mdbWavesEffect>Reset</button>
+            <button type="submit" class="float-right" mdbBtn color="primary" mdbWavesEffect>Sing up</button>
 
-        </form>
+          </form>
 
+
+        </div>
 
       </div>
 
     </div>
-
+    <div class="col-md-2"></div>
   </div>
-   <div class="col-md-2"></div>
- </div>
 </div>
 <br><br><br><br>
