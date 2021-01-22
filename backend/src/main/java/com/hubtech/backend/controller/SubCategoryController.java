@@ -22,10 +22,15 @@ public class SubCategoryController {
 	private SubCategoryService subCategoryService;
 
 	@GetMapping
-	public ResponseEntity<Response> get() {
+	public ResponseEntity<Response> get(@RequestParam("mid") int mid) {
 		return ResponseEntity.status(HttpStatus.OK)
-				.body(new Response(subCategoryService.get(), new Date()));
+				.body(new Response(subCategoryService.get(mid), new Date()));
 	}
+    @GetMapping("/{retrieve_single_sc}")
+    public ResponseEntity<Response> getById(@RequestParam("id") int mid) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new Response(subCategoryService.getById(mid), new Date()));
+    }
 
 	@PostMapping
 	public ResponseEntity<Response> save(@RequestBody SubCategory subCategory) {

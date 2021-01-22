@@ -26,6 +26,11 @@ public class ProductController {
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(new Response(productService.get(), new Date()));
 	}
+    @GetMapping("/{getBySlug}")
+    public ResponseEntity<Response> getBySlug(@RequestParam("slug") String slug) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new Response(productService.getBySlug(slug), new Date()));
+    }
 
 	@PostMapping
 	public ResponseEntity<Response> save(@RequestBody Product product) {

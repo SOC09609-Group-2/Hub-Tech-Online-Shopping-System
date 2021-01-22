@@ -1,6 +1,8 @@
 package com.hubtech.backend.entity;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
+
 @Entity
 @Table(name = "products")
 public class Product implements Serializable {
@@ -110,4 +112,5 @@ public class Product implements Serializable {
     public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
     }
+
 }

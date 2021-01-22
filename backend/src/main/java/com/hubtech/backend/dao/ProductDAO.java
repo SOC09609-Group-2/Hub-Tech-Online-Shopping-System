@@ -25,4 +25,8 @@ public class ProductDAO {
     public void delete(int id) {
         productRepository.deleteById(id);
     }
+
+    public List<Product> getBySlug(String slug) {
+        return productRepository.findBySlug(slug);
+    }
 }

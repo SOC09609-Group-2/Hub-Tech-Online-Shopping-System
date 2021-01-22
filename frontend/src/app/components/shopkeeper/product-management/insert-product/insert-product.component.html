@@ -1,0 +1,99 @@
+<br><br><br>
+<div class="container mt-5">
+  <div class="card z-depth-5">
+    <button type="button" mdbBtn color="primary" mdbWavesEffect>Insert New Product</button>
+    <!--Card content-->
+    <div class="card-body px-lg-5">
+
+      <form class="text-center" style="color: #757575;" enctype="multipart/form-data"
+            #pForm="ngForm" (ngSubmit)="pForm.form.valid && insertProduct(pForm, pForm.value)" novalidate>
+
+        <div class="md-form form-sm mt-3">
+          <input mdbInput mdbValidate  type="text" id="form1" class="form-control form-control-sm"
+                 #name="ngModel" [(ngModel)]="productValidation.name" required name="name" ngModel>
+          <label for="form1" class="">Enter Product Name</label>
+          <mdb-error>
+   <span class="text-danger"
+         *ngIf="(name.touched || pForm.submitted) && name.errors?.required">
+                                Product Name is required!
+                            </span>
+          </mdb-error>
+        </div>
+
+        <div class="md-form form-sm mt-3">
+          <input mdbInput mdbValidate type="number" id="form2" class="form-control form-control-sm"
+                 #price="ngModel" [(ngModel)]="productValidation.price" required name="price" ngModel>
+          <label for="form2" class="">Enter Product Price</label>
+          <mdb-error>
+   <span class="text-danger"
+         *ngIf="(price.touched || pForm.submitted) && price.errors?.required">
+                                Product Price is required!
+                            </span>
+          </mdb-error>
+        </div>
+
+        <div class="md-form form-sm mt-3">
+          <select #mCat class="browser-default custom-select" name="cat_id"
+                  (change)="onSelectMcat($event)" >
+            <option *ngIf="!isSelectMcat"  value="0" selected>Selected Main Category</option>
+            <option *ngFor="let mcat of mcats$ | async"  value="{{mcat.id}}">{{mcat.name}}</option>
+          </select>
+        </div>
+        <div class="md-form form-sm mt-3">
+          <select class="browser-default custom-select" name="sub_cat_id" (click)="onSelectScat($event)">
+            <option *ngIf="isSelectMcat" value="0" selected>Selected Sub Category</option>
+            <option *ngFor="let scat of scats$ | async" value="{{scat.id}}">{{scat.name}}</option>
+          </select>
+        </div>
+
+        <div class="md-form form-sm ">
+          <input  mdbInput  type="file" id="form5" class="form-control form-control-sm" multiple (change)="selectFiles($event)"
+                  #image_name="ngModel"  name="image_name" ngModel>
+          <mdb-error>
+   <span class="text-danger"
+         *ngIf="(image_name.touched || pForm.submitted) && !fileName">
+                                At least one file must be choice!
+                            </span>
+          </mdb-error>
+        </div>
+
+        <div class="md-form form-sm mt-3">
+          <textarea mdbInput mdbValidate type="text" id="form6" class="md-textarea md-textarea-auto form-control"
+                    #content="ngModel" [(ngModel)]="productValidation.content" required    name="content" ngModel></textarea>
+          <label for="form6">Product Description</label>
+          <mdb-error>
+   <span class="text-danger"
+         *ngIf="(content.touched || pForm.submitted) && content.errors?.required">
+                                Product Detail is required!
+                            </span>
+          </mdb-error>
+        </div>
+
+
+<!--        <label class="btn btn-default">-->
+<!--          <input type="file" multiple (change)="selectFiles($event)" />-->
+<!--        </label>-->
+
+<!--        <button-->
+<!--          class="btn btn-success"-->
+<!--          [disabled]="!selectedFiles"-->
+<!--          (click)="uploadFiles()"-->
+<!--        >-->
+<!--          Upload-->
+<!--        </button>-->
+
+
+
+
+        <button type="reset" class="float-left" mdbBtn color="warning" mdbWavesEffect>Reset</button>
+        <button type="submit" class="float-right" mdbBtn color="primary" mdbWavesEffect>
+
+          Insert Product</button>
+
+      </form>
+      <!-- Form -->
+
+    </div>
+
+  </div>
+</div>

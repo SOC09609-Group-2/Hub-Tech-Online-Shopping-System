@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class MainCategoryDAO {
@@ -23,4 +24,7 @@ public class MainCategoryDAO {
 	public void delete(int id) {
         mainCategoryRepository.deleteById(id);
 	}
+    public Optional<MainCategory> getById(int id) {
+        return mainCategoryRepository.findById(id);
+    }
 }

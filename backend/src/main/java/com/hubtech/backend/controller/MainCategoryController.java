@@ -24,6 +24,11 @@ public class MainCategoryController {
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(new Response(mainCategoryService.get(), new Date()));
 	}
+	@GetMapping("/{retrieve_single_mc}")
+	public ResponseEntity<Response> getById(@RequestParam("id") int id) {
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(new Response(mainCategoryService.getById(id), new Date()));
+	}
 
 	@PostMapping
 	public ResponseEntity<Response> save(@RequestBody MainCategory mainCategory) {
