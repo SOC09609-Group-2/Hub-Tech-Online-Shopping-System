@@ -17,7 +17,7 @@ import java.net.MalformedURLException;
 import java.util.LinkedList;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+
 @RestController
 public class FileUploadDownloadController {
 

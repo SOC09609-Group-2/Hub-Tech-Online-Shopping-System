@@ -24,6 +24,8 @@ import {EditProductComponent} from './components/shopkeeper/product-management/e
 import {ViewOrderComponent} from './components/shopkeeper/view-order/view-order.component';
 import {ProductSaleReportComponent} from './components/shopkeeper/product-sale-report/product-sale-report.component';
 import {HomeComponent} from './components/public/home/home.component';
+import { PasswordPattern2Directive } from './directive/register/password-pattern2.directive';
+import { MatchPasswordDirective } from './directive/register/match-password.directive';
 
 
 
@@ -51,6 +53,7 @@ const appRoutes: Routes = [
       {path: 'edit_product/:slug', component: EditProductComponent }
     ],
   },
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
@@ -70,7 +73,9 @@ const appRoutes: Routes = [
     EditProductComponent,
     ViewOrderComponent,
     ProductSaleReportComponent,
-    HomeComponent
+    HomeComponent,
+    PasswordPattern2Directive,
+    MatchPasswordDirective
   ],
   imports: [
     BrowserModule,

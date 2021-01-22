@@ -4,42 +4,81 @@
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-      <h2 align="center" *ngIf="isCustomer" class="text-primary font-weight-bold" style="font-family: 'Times New Roman'">Register As a Customer</h2>
-      <h2 align="center" *ngIf="!isCustomer" class="text-primary font-weight-bold" style="font-family: 'Times New Roman'">Register As a Shopkeeper</h2>
+      <h1 align="center" *ngIf="isCustomer" class="text-primary font-weight-bold" style="font-family: 'Times New Roman'">Register As a Customer</h1>
+      <h1 align="center" *ngIf="!isCustomer" class="text-primary font-weight-bold" style="font-family: 'Times New Roman'">Register As a Shopkeeper</h1>
       <div class="card z-depth-5 mt-4">
-        <button *ngIf="isCustomer" type="button" (click)="choiceRole('shopkeeper')" mdbBtn color="success" mdbWavesEffect>Sing up As a Shopkeeper</button>
-        <button *ngIf="!isCustomer" type="button" (click)="choiceRole('customer')" mdbBtn color="success" mdbWavesEffect>Sing up As a Customer</button>
+        <button *ngIf="isCustomer" type="button" (click)="choiceRole('shopkeeper')" mdbBtn color="success" mdbWavesEffect>Click Sing up As a Shopkeeper</button>
+        <button *ngIf="!isCustomer" type="button" (click)="choiceRole('customer')" mdbBtn color="success" mdbWavesEffect>Click Sing up As a Customer</button>
 
         <!--Card content-->
         <div class="card-body px-lg-5">
 
-          <form #regForm="ngForm" *ngIf="isCustomer" class="text-center" style="color: #757575;" (ngSubmit)="register(image, regForm, regForm.value, 'customer')">
+          <form #regForm="ngForm" *ngIf="isCustomer" class="text-center" style="color: #757575;" [appMatchPassword]="['password', 'con_password']"
+                (ngSubmit)="regForm.form.valid &&  register(image, regForm, regForm.value, 'customer')" novalidate>
 
             <div class="md-form form-sm mt-3">
 
-              <input mdbInput type="email" id="form1" class="form-control form-control-sm" name="name" ngModel>
+              <input mdbInput mdbValidate type="text" id="form1" class="form-control form-control-sm"
+                     #name="ngModel" name="name" required ngModel>
               <label for="form1" class="">Name</label>
+              <mdb-error>
+   <span class="text-danger"
+         *ngIf="(name.touched || regForm.submitted) && name.errors?.required">
+                                Name is required
+                            </span>
+              </mdb-error>
             </div>
 
             <div class="md-form form-sm mt-3">
 
-              <input mdbInput type="email" id="form2" class="form-control form-control-sm" name="email" ngModel>
+              <input mdbInput mdbValidate type="email" id="form2" class="form-control form-control-sm"
+                     #email="ngModel" required email name="email" ngModel>
               <label for="form2" class="">Email</label>
+              <mdb-error>
+   <span class="text-danger"
+         *ngIf="(email.touched || regForm.submitted) && email.errors?.required">
+                                Email is required
+                            </span>
+                <span class="text-danger" *ngIf="email.touched && email.errors?.email">
+                                Enter a valid email address
+                            </span>
+              </mdb-error>
             </div>
 
             <div class="md-form form-sm mt-3">
-              <input mdbInput type="email" id="form3" class="form-control form-control-sm" name="address" ngModel>
+              <input mdbInput type="text" id="form3" class="form-control form-control-sm" name="address"
+                     #address="ngModel" mdbValidate required ngModel>
               <label for="form3" class="">Address</label>
+              <mdb-error>
+   <span class="text-danger"
+         *ngIf="(address.touched || regForm.submitted) && address.errors?.required">
+                                Address is required
+                            </span>
+              </mdb-error>
             </div>
 
             <div class="md-form form-sm mt-3">
-              <input mdbInput type="date" id="form8" class="form-control form-control-sm" name="dob" ngModel>
+              <input mdbInput type="date" id="form8" class="form-control form-control-sm"
+                     #dob="ngModel" mdbValidate required   name="dob" ngModel>
               <label for="form8" class="">Date of Birth</label>
+              <mdb-error>
+   <span class="text-danger"
+         *ngIf="(dob.touched || regForm.submitted) && dob.errors?.required">
+                                DoB is required
+                            </span>
+              </mdb-error>
             </div>
 
             <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" value="male" class="custom-control-input" id="defaultInline1" name="gender" ngModel  mdbInput>
+              <input type="radio" value="male" class="custom-control-input" id="defaultInline1"
+                     #gender="ngModel" mdbValidate required name="gender" ngModel  mdbInput>
               <label class="custom-control-label" for="defaultInline1">Male</label>
+              <mdb-error>
+   <span class="text-danger"
+         *ngIf="(gender.touched || regForm.submitted) && gender.errors?.required">
+                               Required!
+                            </span>
+              </mdb-error>
             </div>
 
 
@@ -48,18 +87,46 @@
               <label class="custom-control-label" for="defaultInline2">Female</label>
             </div>
 
-            <div class="md-form form-sm ">
-              <input #image mdbInput type="file" id="form5" class="form-control form-control-sm" (change)="onFileSeletected($event)" name="image_name" ngModel>
+            <div class="md-form form-sm mt-5 ">
+              <input #image="ngModel" mdbInput type="file" id="form5" class="form-control form-control-sm" (change)="onFileSeletected($event)" name="image_name" ngModel>
+              <mdb-error>
+   <span class="text-danger"
+         *ngIf="(image.touched || regForm.submitted) && !fileName">
+                                At least one file must be choice!
+                            </span>
+              </mdb-error>
             </div>
 
             <div class="md-form form-sm mt-3">
-              <input mdbInput type="password" id="form6" class="form-control form-control-sm" name="password" ngModel>
+              <input mdbInput mdbValidate type="password" id="form6" class="form-control form-control-sm"
+                     #password="ngModel" appPasswordPattern2 required name="password" ngModel>
               <label for="form6" class="">Password</label>
+              <mdb-error>
+              <span class="text-danger"
+                    *ngIf="(password.touched || regForm.submitted) && password.errors?.required">
+                                Password is required
+                            </span>
+              <span class="text-danger" *ngIf="password.touched && password.errors?.invalidPassword">
+                                Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase
+                                letter and 1 number
+                            </span>
+              </mdb-error>
             </div>
 
             <div class="md-form form-sm mt-3">
-              <input mdbInput type="password" id="form7" class="form-control form-control-sm" name="con_password" ngModel>
+              <input mdbInput mdbValidate type="password" id="form7" class="form-control form-control-sm"
+                     #con_password="ngModel"  required name="con_password"  ngModel>
               <label for="form7" class="">Confirmation Password</label>
+              <mdb-error>
+                 <span class="text-danger"
+                       *ngIf="(con_password.touched || regForm.submitted) && con_password.errors?.required">
+                                Confirm Password is required
+                            </span>
+                <span class="text-danger"
+                      *ngIf="con_password.touched && con_password.errors?.passwordMismatch">
+                                Passwords doesnot match
+                            </span>
+              </mdb-error>
             </div>
 
             <button type="reset" class="float-left" mdbBtn color="warning" mdbWavesEffect>Reset</button>
@@ -69,54 +136,105 @@
           <!-- Form -->
 
 
-          <form #regForm="ngForm" *ngIf="!isCustomer" class="text-center" style="color: #757575;" (ngSubmit)="register(image, regForm, regForm.value, 'shopkeeper')">
+          <form #regForm="ngForm" *ngIf="!isCustomer" class="text-center" style="color: #757575;"
+                [appMatchPassword]="['password', 'con_password']" (ngSubmit)="register(image, regForm, regForm.value, 'shopkeeper')">
 
-            <!-- Name -->
             <div class="md-form form-sm mt-3">
-
-
-              <input mdbInput type="email" id="form10" class="form-control form-control-sm" name="name" ngModel>
+              <input mdbInput type="email" id="form10" class="form-control form-control-sm" name="name"
+                     #name="ngModel" required mdbValidate ngModel>
               <label for="form10" class="">Name</label>
-
+              <mdb-error>
+   <span class="text-danger"
+         *ngIf="(name.touched || regForm.submitted) && name.errors?.required">
+                                Name is required
+                            </span>
+              </mdb-error>
             </div>
+
 
             <!-- E-mai -->
             <div class="md-form form-sm mt-3">
 
-              <input mdbInput type="email" id="form11" class="form-control form-control-sm" name="email" ngModel>
+              <input mdbInput type="email" id="form11" class="form-control form-control-sm" name="email"
+                     #email="ngModel" required mdbValidate ngModel>
               <label for="form11" class="">Email</label>
-
+              <mdb-error>
+   <span class="text-danger"
+         *ngIf="(email.touched || regForm.submitted) && email.errors?.required">
+                                Email is required
+                            </span>
+                <span class="text-danger" *ngIf="email.touched && email.errors?.email">
+                                Enter a valid email address
+                            </span>
+              </mdb-error>
             </div>
 
             <!-- E-mai -->
             <div class="md-form form-sm mt-3">
-              <input mdbInput type="text" id="form12" class="form-control form-control-sm" name="address" ngModel>
+              <input mdbInput type="text" id="form12" class="form-control form-control-sm" name="address"
+                     #Saddress="ngModel"  required mdbValidate ngModel>
               <label for="form12" class="">Shop Address</label>
-
+              <mdb-error>
+   <span class="text-danger"
+         *ngIf="(Saddress.touched || regForm.submitted) && Saddress.errors?.required">
+                                Shop Address is required
+                            </span>
+              </mdb-error>
             </div>
 
 
             <!-- E-mai -->
             <div class="md-form form-sm ">
-              <input mdbInput #image type="file" id="form13" class="form-control form-control-sm" (change)="onFileSeletected($event)" name="image_name" ngModel>
-
+              <input mdbInput #image="ngModel" type="file" id="form13" class="form-control form-control-sm" (change)="onFileSeletected($event)" name="image_name" ngModel>
+              <mdb-error>
+   <span class="text-danger"
+         *ngIf="(image.touched || regForm.submitted) && !fileName">
+                                At least one file must be choice!
+                            </span>
+              </mdb-error>
             </div>
             <div class="md-form form-sm mt-3">
-              <input mdbInput type="text" id="form16" class="form-control form-control-sm" name="shop_name" ngModel>
+              <input mdbInput type="text" id="form16" class="form-control form-control-sm" name="shop_name"
+                     #Sname="ngModel" required mdbValidate ngModel>
               <label for="form16" class="">Shop Name</label>
-
+              <mdb-error>
+   <span class="text-danger"
+         *ngIf="(Sname.touched || regForm.submitted) && Sname.errors?.required">
+                                Shop Name is required
+                            </span>
+              </mdb-error>
             </div>
 
             <div class="md-form form-sm mt-3">
-              <input mdbInput type="password" id="form14" class="form-control form-control-sm" name="password" ngModel>
+              <input mdbInput mdbValidate type="password" id="form14" class="form-control form-control-sm"
+                     #password="ngModel" appPasswordPattern2 required name="password" ngModel>
               <label for="form14" class="">Password</label>
-
+              <mdb-error>
+              <span class="text-danger"
+                    *ngIf="(password.touched || regForm.submitted) && password.errors?.required">
+                                Password is required
+                            </span>
+                <span class="text-danger" *ngIf="password.touched && password.errors?.invalidPassword">
+                                Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase
+                                letter and 1 number
+                            </span>
+              </mdb-error>
             </div>
 
             <div class="md-form form-sm mt-3">
-              <input mdbInput type="password" id="form15" class="form-control form-control-sm" name="con_password" ngModel>
+              <input mdbInput mdbValidate type="password" id="form15" class="form-control form-control-sm"
+                     #con_password="ngModel"  required name="con_password" ngModel>
               <label for="form15" class="">Confirmation Password</label>
-
+              <mdb-error>
+                 <span class="text-danger"
+                       *ngIf="(con_password.touched || regForm.submitted) && con_password.errors?.required">
+                                Confirm Password is required
+                            </span>
+                <span class="text-danger"
+                      *ngIf="con_password.touched && con_password.errors?.passwordMismatch">
+                                Passwords doesnot match
+                            </span>
+              </mdb-error>
             </div>
 
 

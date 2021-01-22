@@ -12,6 +12,7 @@ import {UploadFileService} from '../../../services/UploadFileService ';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  userValidation = new UserModel();
   validationError = [];
   isLoading = false;
   selectedFiles: FileList;
