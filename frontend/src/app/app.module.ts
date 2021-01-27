@@ -26,6 +26,7 @@ import {ProductSaleReportComponent} from './components/shopkeeper/product-sale-r
 import {HomeComponent} from './components/public/home/home.component';
 import { PasswordPattern2Directive } from './directive/register/password-pattern2.directive';
 import { MatchPasswordDirective } from './directive/register/match-password.directive';
+import {ProductDetailComponent} from './components/public/product-detail/product-detail.component';
 
 
 
@@ -39,6 +40,7 @@ const appRoutes: Routes = [
       {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent },
       {path: 'faq', component: FaqComponent },
+      {path: 'product-detail', component: ProductDetailComponent },
       {path: 'contact', component: ContactComponent },
       {path: 'aboutUs', component: AboutUsComponent}
     ],
@@ -47,6 +49,7 @@ const appRoutes: Routes = [
     component: ShopkeeperComponent,
     children: [
       {path: 'insert_product', component: InsertProductComponent },
+      {path: 'view_products', component: ViewProductsComponent },
       {path: 'view_products', component: ViewProductsComponent },
       {path: 'view_order', component: ViewOrderComponent },
       {path: 'shopkeeper-report', component: ProductSaleReportComponent },
@@ -75,7 +78,8 @@ const appRoutes: Routes = [
     ProductSaleReportComponent,
     HomeComponent,
     PasswordPattern2Directive,
-    MatchPasswordDirective
+    MatchPasswordDirective,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,
