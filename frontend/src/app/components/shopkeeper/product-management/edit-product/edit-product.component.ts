@@ -70,7 +70,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
       }
     });
   }
-  updateProduct(pform: NgForm, productData: ProductModel) {
+      updateProduct(pform: NgForm, productData: ProductModel) {
     productData.id = Number(this.pID);
     productData.slug = this.slug;
     productData.created_at = this.products$[0].created_at;

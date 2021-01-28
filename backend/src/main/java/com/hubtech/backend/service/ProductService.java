@@ -31,4 +31,10 @@ public class ProductService {
     public List<Product> getBySlug(String slug) {
         return productDAO.getBySlug(slug);
     }
+    public List<Product> findByCatAndScat(int cid, int scid) {
+        return productDAO.findByCatAndScat(cid, scid);
+    }
+    public List<Product> findByNameContaining(String name) {
+        return productDAO.findByNameContaining(name);
+    }
 }

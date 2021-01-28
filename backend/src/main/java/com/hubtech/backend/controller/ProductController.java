@@ -24,12 +24,22 @@ public class ProductController {
 	@GetMapping
 	public ResponseEntity<Response> get() {
 		return ResponseEntity.status(HttpStatus.OK)
-				.body(new Response(productService.get(), new Date()));
+                .body(new Response(productService.get(), new Date()));
 	}
-    @GetMapping("/{getBySlug}")
+    @GetMapping("/getBySlug")
     public ResponseEntity<Response> getBySlug(@RequestParam("slug") String slug) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new Response(productService.getBySlug(slug), new Date()));
+    }
+    @GetMapping("/fliter")
+    public ResponseEntity<Response> findByCidAndScid(@RequestParam("cid") int cid, @RequestParam("scid") int scid) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new Response(productService.findByCatAndScat(cid, scid), new Date()));
+    }
+  @GetMapping("/search")
+    public ResponseEntity<Response> findByCidAndScid(@RequestParam("name") String name) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new Response(productService.findByNameContaining(name), new Date()));
     }
 
 	@PostMapping

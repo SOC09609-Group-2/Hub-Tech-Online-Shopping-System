@@ -1,0 +1,78 @@
+<br><br><br>
+<div class="container mt-5">
+  <table id="tableSortExample" mdbTable class="z-depth-1 bg-white" *ngIf="products == null? false : true">
+    <thead>
+    <tr>
+      <td align="center" style="font-weight: bold"><strong>Product Name</strong></td>
+      <td align="center" style="font-weight: bold"><strong>Image</strong></td>
+      <td align="center" style="font-weight: bold"><strong>Quantity</strong></td>
+        <th><strong>Price</strong></th>
+      <th><strong>Delete</strong></th>
+    </tr>
+    </thead>
+    <tbody #row>
+    <tr mdbTableCol  *ngFor="let product of products |paginate: {
+                                                      itemsPerPage: 3,
+                                                      currentPage: p };">
+      <td align="center">{{product.name}}</td>
+      <td style="width: 200px;">
+        <img src="/assets/images/{{getImages(product.image_name)[0]}}" class="img-fluid" alt="Responsive image">
+      </td>
+      <td align="center">
+        <button type="button" size="sm" mdbBtn color="primary" mdbWavesEffect (click)="inCrease(product.id, pty , totalPrice, finalPrice)">
+          <mdb-icon fas icon="plus"></mdb-icon>
+        </button>
+        <input disabled #pty [(ngModel)]=product.qty style="width: 20px; background: none;text-align: center;border: none;">
+        <button type="button" size="sm" mdbBtn color="primary" mdbWavesEffect (click)="deCrease(product.id, pty , totalPrice, finalPrice)">
+          <mdb-icon fas icon="minus"></mdb-icon>
+        </button>
+      </td>
+
+      <td >
+        <input disabled #totalPrice [(ngModel)]="'$'+product.totalPrice" style=" background: none;border: none;">
+        </td>
+      <td>
+        <button mdbBtn type="button" size="sm" color="danger" mdbWavesEffect (click)="deleteItem(product.id)">
+          <mdb-icon fas icon="trash" ></mdb-icon>
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <strong>Total Price</strong>
+      </td>
+      <td colspan="4" align="right">
+        $<input disabled #finalPrice [(ngModel)]=totalPrice style=" background: none;border: none;">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <button type="button" mdbBtn color="warning" mdbWavesEffect (click)="removeCart()">Clear Cart</button>
+      </td>
+      <td colspan="2" align="right">
+        <button type="button" mdbBtn color="primary" mdbWavesEffect (click)="pay(totalPrice)">Checkout</button>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot class="lighten-5 w-00">
+    <tr>
+      <td colspan="5" align="center">
+        <pagination-controls
+          maxSize="3"
+          directionLinks="true"
+          responsive="true"
+          previousLabel="Previous"
+          nextLabel="Next"
+          (pageChange)="p = $event">
+        </pagination-controls>
+      </td>
+    </tr>
+    </tfoot>
+  </table>
+
+</div>
+
+
+<div class="container mt-5" *ngIf="products == null" style="height: 285px">
+  <h1 align="center" class="text-primary">There have no add to cart products</h1>
+</div>

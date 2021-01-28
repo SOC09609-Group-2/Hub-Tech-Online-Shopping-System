@@ -12,7 +12,6 @@ import java.util.List;
 
 @Repository
 public class ProductDAO {
-
     @Autowired
     private ProductRepository productRepository;
     public List<Product> get() {
@@ -29,4 +28,12 @@ public class ProductDAO {
     public List<Product> getBySlug(String slug) {
         return productRepository.findBySlug(slug);
     }
+    public List<Product> findByCatAndScat(int cid, int scid) {
+        return productRepository.findByCatAndScat(cid, scid);
+    }
+   public List<Product> findByNameContaining(String name) {
+        return productRepository.findByNameContaining(name);
+    }
+
+
 }

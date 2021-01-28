@@ -7,7 +7,8 @@ import {Observable} from 'rxjs';
 
 export class PaymentDetailService {
   constructor(private http: HttpClient) {}
-  inertPayment(proData, paymentID: number, customerSlug: string, orderNo: string) {
+  inertPayment(proData, paymentID: number, customerSlug: string, orderNo: string, month: string) {
+    const date = new Date();
     const paymentData: Payment_detailModel = {
       order_no: orderNo,
       payment_id: paymentID,
@@ -16,14 +17,26 @@ export class PaymentDetailService {
       qty: proData.qty,
       total_price: proData.totalPrice,
       unit_price: proData.price,
-      customerSlug,
+      year: date.getFullYear().toString(),
+      month,
+      customer_slug: customerSlug,
       supplier_id: proData.supplier_id};
-    return this.http.post(URL_HOST + '/api/insert_payment_detail', paymentData);
+    return this.http.post(URL_HOST + '/api/payment_detail', paymentData);
   }
   customer_order(id, date): Observable<any> {
     return this.http.get(URL_HOST + '/api/payment_detail/view_order_detail?pid=' + id + '&tdate=' + date);
   }
   order_customer_view(slug, date): Observable<any> {
-    return this.http.get(URL_HOST + '/api/order_customer_view/' + slug + '/' + date);
+    return this.http.get(URL_HOST + '/api/payment_detail/customer_view_order_detail?ddate=' + date + '&slug=' + slug);
+  }
+  order_Order_status(slug, date): Observable<any> {
+    return this.http.get(URL_HOST + '/api/payment_detail/order_status_detail?ddate=' + date + '&slug=' + slug);
+  }
+  view_Order_status(slug, date): Observable<any> {
+    return this.http.get(URL_HOST + '/api/payment_detail/view_order_status?ddate=' + date + '&slug=' + slug);
+  }
+
+  updateOrderStatus(orderStatus, orderNo): Observable<any>  {
+    return this.http.get(URL_HOST + '/api/payment_detail/updateStatus?order_status=' + orderStatus + '&order_no=' + orderNo);
   }
 }
