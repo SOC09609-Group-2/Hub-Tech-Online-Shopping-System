@@ -8,19 +8,28 @@
           <!-- START ACCORDION -->
           <h2 align="center" class="text-primary font-weight-bold">Frequently Ask Questions</h2>
           <div class="tabs mt-4">
-            <div  class="tab" >
-              <input type="checkbox" id="chck1">
-              <label class="tab-label" for="chck1">Hello</label>
+            <div  class="tab" *ngFor="let faq of faqs$ | async|paginate: {
+                                                      itemsPerPage: 10,
+                                                      currentPage: p }; let i = index">
+              <input type="checkbox" id="chck{{faq.id}}">
+              <label class="tab-label" for="chck{{faq.id}}">{{faq.question}}</label>
               <div class="tab-content">
-         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                A eaque modi nam neque obcaecati omnis quis sequi vero!
-                Ad adipisci amet aperiam, dolorem eaque error et excepturi fugit non quod.
+                {{faq.answer}}
               </div>
             </div>
 
           </div>
 
-
+          <div class="mt-5">
+            <pagination-controls
+              maxSize="10"
+              directionLinks="true"
+              responsive="true"
+              previousLabel="Previous"
+              nextLabel="Next"
+              (pageChange)="p = $event" align="center">
+            </pagination-controls>
+          </div>
 
         </div>
         <!--container-->

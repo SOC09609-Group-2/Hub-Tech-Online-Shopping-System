@@ -12,6 +12,7 @@ import {UploadFileService} from '../../../services/UploadFileService ';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  agree: boolean;
   userValidation = new UserModel();
   validationError = [];
   isLoading = false;
@@ -113,5 +114,9 @@ export class RegisterComponent implements OnInit {
       '-' + this.pad2( date.getDate()) + ' ' + this.pad2( date.getHours() ) + ':' + this.pad2( date.getMinutes() ) +
       ':' + this.pad2( date.getSeconds() );
     return this.generateDateNow;
+  }
+
+  isAgree(event) {
+    this.agree = event.checked;
   }
 }

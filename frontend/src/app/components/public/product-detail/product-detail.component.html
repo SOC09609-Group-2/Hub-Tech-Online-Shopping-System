@@ -1,0 +1,34 @@
+<br><br>
+<br>
+<div class="container mt-5 mb-5" *ngFor="let product of product$">
+  <h2 align="center" class="text-primary font-weight-bold">Product Detail Page</h2>
+<div class="row mt-5">
+  <div class="col-md-6">
+    <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
+      <mdb-carousel-item *ngFor="let image of getImages(product.image_name)">
+        <div class="view w-100">
+          <img class="d-block w-100" src="/assets/images/{{image}}" alt="First slide">
+          <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+        </div>
+
+      </mdb-carousel-item>
+
+    </mdb-carousel>
+
+  </div>
+  <div class="col-md-6">
+    <h3 align="center" class="text-primary">{{product.name}}</h3>
+    <p align="justify">{{product.content}}</p>
+    <mdb-badge primary="true">${{product.price}}</mdb-badge>
+    <br>
+    <br>
+    <button type="button" class="float-right" size="sm" mdbBtn color="primary" mdbWavesEffect>
+      <mdb-icon fas icon="comment"></mdb-icon></button>
+
+    <button type="button" class="float-left" mdbBtn color="primary" (click)="saveProducts(product.slug)" size="sm" mdbWavesEffect >
+      <mdb-icon fas icon="cart-arrow-down"></mdb-icon></button>
+  </div>
+</div>
+</div>
+
+

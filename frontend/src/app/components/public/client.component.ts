@@ -12,5 +12,8 @@ export class ClientComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  search(data) {
+    const keyword = data.target.value;
+    this.router.navigate(['/search', keyword ]);
+  }
 }

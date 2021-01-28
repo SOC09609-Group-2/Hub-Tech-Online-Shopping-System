@@ -2,9 +2,7 @@ package com.hubtech.backend.service;
 
 import com.hubtech.backend.dao.PaymentDetailDAO;
 import com.hubtech.backend.entity.PaymentDetail;
-import com.hubtech.backend.model.OrderDetailDto;
-import com.hubtech.backend.model.ProductMonthSaleDto;
-import com.hubtech.backend.model.ProductYearSaleDto;
+import com.hubtech.backend.model.*;
 import com.hubtech.backend.repository.PaymentDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,5 +38,21 @@ public class PaymentDetailService {
 
     public Collection<ProductMonthSaleDto> getyearSale(int pid, String  tdate1, String tdate2) {
         return paymentDetailDAO.getmonthSale(pid,tdate1,tdate2);
+    }
+
+    public Collection<CustomerOrderDto> findCustomerOrder(String  ddate, String slug) {
+        return paymentDetailDAO.findCustomerOrder(ddate, slug);
+    }
+
+    public Collection<CustomerStatusDto> findOrderStatus(String  ddate, String slug) {
+        return paymentDetailDAO.findOrderStatus(ddate, slug);
+    }
+
+    public Collection<ViewOrderStatusDto> view_order_status(String  ddate, String slug) {
+        return paymentDetailDAO.view_order_status(ddate, slug);
+    }
+
+    public void updateStatus(String  order_status, String order_no) {
+         paymentDetailDAO.updateStatus(order_status, order_no);
     }
 }

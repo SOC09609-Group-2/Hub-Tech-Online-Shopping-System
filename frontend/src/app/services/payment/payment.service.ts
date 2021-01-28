@@ -7,12 +7,9 @@ import {Observable, observable} from 'rxjs';
 
 export class PaymentService {
   constructor(private http: HttpClient) {}
-  inertPayment(customerSlug: string) {
-    const paymentData: PaymentModel = {customerSlug};
-    return this.http.post(URL_HOST + '/api/insert_payment', paymentData,
-      {
-        observe: 'response'
-      });
+  inertPayment(customer_slug, order_no, date, created_at) {
+    const paymentData: PaymentModel = {customer_slug, order_no, date, created_at};
+    return this.http.post(URL_HOST + '/api/payment', paymentData);
   }
   retrievePayments(): Observable<any> {
     return this.http.get(URL_HOST + '/api/view_payments');

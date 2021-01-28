@@ -1,20 +1,18 @@
 package com.hubtech.backend.entity;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.sql.Date;
+import java.util.Set;
 
 @Entity
-@Table(name = "payments")
-public class Payment implements Serializable {
+@Table(name = "faqs")
+public class Faq implements Serializable {
     private static final long serialVersionUID = 1681261145191719508L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String customer_slug;
-    private String order_no;
-    private String date;
+    private String question;
+    private String answer;
+    private String slug;
     private String created_at;
     private String updated_at;
 
@@ -30,28 +28,28 @@ public class Payment implements Serializable {
         this.id = id;
     }
 
-    public String getCustomer_slug() {
-        return customer_slug;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setCustomer_slug(String customer_slug) {
-        this.customer_slug = customer_slug;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
-    public String getOrder_no() {
-        return order_no;
+    public String getAnswer() {
+        return answer;
     }
 
-    public void setOrder_no(String order_no) {
-        this.order_no = order_no;
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
-    public String getDate() {
-        return date;
+    public String getSlug() {
+        return slug;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setSlug(String slug) {
+        this.slug = slug;
     }
 
     public String getCreated_at() {
@@ -69,5 +67,4 @@ public class Payment implements Serializable {
     public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
     }
-
 }
