@@ -25,4 +25,7 @@ public class FaqDAO {
     public void delete(int id) {
         faqRepository.deleteById(id);
     }
+    public List<Faq> findBySlug(String slug) {
+        return faqRepository.findBySlug(slug);
+    }
 }

@@ -28,6 +28,11 @@ public class PaymentDetailController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new Response(paymentDetailService.get(), new Date()));
     }
+    @GetMapping("/view_revenue")
+    public ResponseEntity<Response> getOrdersDetail(){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new Response(paymentDetailService.view_revenue(), new Date()));
+    }
     @GetMapping("/view_order_detail")
     public ResponseEntity<Response> getOrdersDetail(@RequestParam("pid") Integer pid, @RequestParam("tdate") String tdate) throws ParseException {
         return ResponseEntity.status(HttpStatus.OK)

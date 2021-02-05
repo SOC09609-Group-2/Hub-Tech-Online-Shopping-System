@@ -118,7 +118,8 @@ export class CartProductComponent implements OnInit {
           const customerSlug = res['data']['customer_slug'];
           const orderNo = res['data']['order_no'];
           for (let i = 0; i < productArray.length; i++) {
-            this.paymentDetailService.inertPayment(productArray[i], paymentId, customerSlug, orderNo, String(date.getMonth() + 1)).subscribe(() => {
+            this.paymentDetailService.inertPayment(productArray[i], paymentId, customerSlug, orderNo, String(date.getMonth() + 1),
+              this.generateDate(), this.generateDateTime()).subscribe(() => {
                 localStorage.removeItem('items');
                 this.getProData();
             });

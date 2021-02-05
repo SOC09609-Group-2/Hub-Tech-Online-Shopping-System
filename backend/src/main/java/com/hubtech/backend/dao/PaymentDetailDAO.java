@@ -57,5 +57,8 @@ public class PaymentDetailDAO {
         paymentDetailRepository.updateStatus(order_status, order_no);
    }
 
-
+    public Collection<RevenueDto> view_revenue() {
+        Collection<RevenueDto> list = paymentDetailRepository.view_revenue();
+        return list;
+    }
 }

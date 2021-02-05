@@ -22,11 +22,14 @@ export class LoginComponent implements OnInit {
   login(userData: UserModel) {
     this.auth.login(userData).subscribe( status => {
           if (status.data != null) {
-            this.toastrService.success('Login Success', 'Success');
-            localStorage.setItem('userData', JSON.stringify(status.data));
-            this.router.navigateByUrl('/');
+           if ( status.data.status != 'active') {
+             this.toastrService.warning('Your account is locked!', 'Account Lock');
+           } else {
+             this.toastrService.success('Login Success', 'Success');
+             localStorage.setItem('userData', JSON.stringify(status.data));
+             this.router.navigateByUrl('/');
+           }
           } else {
-            console.log(status.data)
             this.toastrService.error('Email or Password wrong', 'Login Fail');
           }
     });

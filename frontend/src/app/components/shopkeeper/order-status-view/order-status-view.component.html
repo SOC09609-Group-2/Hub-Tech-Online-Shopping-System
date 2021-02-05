@@ -1,0 +1,108 @@
+<br><br><br><br>
+<div class="container mt-4">
+  <h1 class="text-center text-primary font-weight-bold">View Orders</h1>
+  <br>
+  <div class="md-form">
+    <input type="date" id="date" (change)="viewOrder($event)" value="{{cYM}}" class="form-control" mdbInput>
+    <label for="date">Choice Date</label>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table id="tableSortExample" mdbTable class="z-depth-1 bg-white">
+        <thead >
+        <tr>
+          <th><strong>ID</strong></th>
+          <th><strong>Customer Name</strong></th>
+          <th><strong>Quantity</strong></th>
+          <th><strong>Total Price</strong></th>
+          <th><strong>Order Date</strong></th>
+          <th><strong>Order Progress</strong></th>
+          <th><strong>Order Progress Change</strong></th>
+        </tr>
+        </thead>
+        <tbody #row>
+        <tr mdbTableCol *ngFor="let orderData of orderDatas$ | async |paginate: {
+                                                      itemsPerPage: 5,
+                                                      currentPage: p }; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{orderData.name}}</td>
+          <td>{{orderData.qty}}</td>
+          <td>${{orderData.total_price}}</td>
+          <td>{{orderData.created_at}}</td>
+          <td>
+            <div *ngIf="orderData.order_status == 'Order Processed'" class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="20"
+                   aria-valuemin="0" aria-valuemax="100" style="width:20%">
+                20%
+              </div>
+            </div>
+
+            <div *ngIf="orderData.order_status == 'Order Designing'" class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="40"
+                   aria-valuemin="0" aria-valuemax="100" style="width:40%">
+                40%
+              </div>
+            </div>
+
+            <div *ngIf="orderData.order_status == 'Order Shipped'" class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="60"
+                   aria-valuemin="0" aria-valuemax="100" style="width:60%">
+                60%
+              </div>
+            </div>
+
+            <div *ngIf="orderData.order_status == 'Order En Route'" class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="80"
+                   aria-valuemin="0" aria-valuemax="100" style="width:80%">
+                80%
+              </div>
+            </div>
+
+            <div *ngIf="orderData.order_status == 'Order Arrived'" class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="100"
+                   aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                100%
+              </div>
+            </div>
+
+          </td>
+          <td>
+            <select class="browser-default custom-select" (change)="onSeletProgress($event,orderData.order_no)" >
+              <option value="Order Processed" selected>{{orderData.order_status}}</option>
+              <option value="Order Processed" *ngIf="orderData.order_status != 'Order Processed'">
+                Order Processed</option>
+              <option value="Order Designing" *ngIf="orderData.order_status != 'Order Designing'">
+                Order Packaging</option>
+              <option value="Order Shipped" *ngIf="orderData.order_status != 'Order Shipped'">
+                Order Shipped</option>
+              <option value="Order En Route" *ngIf="orderData.order_status != 'Order En Route'">
+                Order En Route</option>
+              <option value="Order Arrived" *ngIf="orderData.order_status != 'Order Arrived'">
+                Order Arrived</option>
+            </select>
+
+          </td>
+        </tr>
+        </tbody>
+        <tfoot class="lighten-5 w-00">
+        <tr>
+          <td colspan="7" align="center">
+            <pagination-controls
+              maxSize="5"
+              directionLinks="true"
+              responsive="true"
+              previousLabel="Previous"
+              nextLabel="Next"
+              (pageChange)="p = $event">
+
+            </pagination-controls>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+

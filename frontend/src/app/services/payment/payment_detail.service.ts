@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 
 export class PaymentDetailService {
   constructor(private http: HttpClient) {}
-  inertPayment(proData, paymentID: number, customerSlug: string, orderNo: string, month: string) {
+  inertPayment(proData, paymentID: number, customerSlug: string, orderNo: string, month: string, odate: string, cdate: string) {
     const date = new Date();
     const paymentData: Payment_detailModel = {
       order_no: orderNo,
@@ -19,12 +19,19 @@ export class PaymentDetailService {
       unit_price: proData.price,
       year: date.getFullYear().toString(),
       month,
+      date: odate,
+      created_at: cdate,
+      order_status: 'Order Processed',
       customer_slug: customerSlug,
       supplier_id: proData.supplier_id};
     return this.http.post(URL_HOST + '/api/payment_detail', paymentData);
   }
   customer_order(id, date): Observable<any> {
     return this.http.get(URL_HOST + '/api/payment_detail/view_order_detail?pid=' + id + '&tdate=' + date);
+  }
+
+  view_revenue(): Observable<any> {
+    return this.http.get(URL_HOST + '/api/payment_detail/view_revenue');
   }
   order_customer_view(slug, date): Observable<any> {
     return this.http.get(URL_HOST + '/api/payment_detail/customer_view_order_detail?ddate=' + date + '&slug=' + slug);

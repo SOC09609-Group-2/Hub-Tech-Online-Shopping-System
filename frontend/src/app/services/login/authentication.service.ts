@@ -22,7 +22,9 @@ export class AuthenticationService {
       return valid ? null : { invalidPassword: true };
     };
   }
-
+  public getUsers(): Observable<any> {
+    return this.http.get(URL_HOST + '/api/user');
+  }
 
   patternValidator2(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
@@ -34,7 +36,9 @@ export class AuthenticationService {
       return valid ? null : { invalidPassword: true };
     };
   }
-
+  public banUser(slug, action): Observable<any> {
+    return this.http.get(URL_HOST + '/api/user/banUser?slug=' + slug + '&action=' + action);
+  }
   MatchPassword(password: string, confirmPassword: string) {
     return (formGroup: FormGroup) => {
       const passwordControl = formGroup.controls[password];
@@ -61,6 +65,14 @@ export class AuthenticationService {
   }
   public register(user: UserModel): Observable<any> {
     return this.http.post(URL_HOST + '/api/user', user);
+  }
+
+  public updateProfile(id: number, name: string, email: string, address: string, image: string): Observable<any> {
+    return this.http.get(URL_HOST + '/api/user/updateProfile?id=' +
+      id + '&name=' + name + '&email=' + email + '&address=' + address + '&image=' + image);
+  }
+  public retrieveByID(id: number): Observable<any> {
+    return this.http.get(URL_HOST + '/api/user/retrieveByID?id=' + id );
   }
 
   public getUserData() {
@@ -92,6 +104,9 @@ export class AuthenticationService {
   }
   getImageName() {
     return this.getUserData().image_name;
+  }
+  modifyImageName() {
+    return '/assets/images/' + this.getUserData().image_name;
   }
 
   public logout(): void {

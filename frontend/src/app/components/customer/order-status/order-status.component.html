@@ -1,0 +1,166 @@
+<br><br><br><br>
+<div class="container mt-4">
+  <h1 class="text-center text-primary font-weight-bold">View Orders Status</h1>
+  <br>
+  <div class="md-form">
+    <input type="date" id="date" (change)="viewOrder($event)" value="{{cYM}}" class="form-control" mdbInput>
+    <label for="date">Choice Date</label>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table id="tableSortExample" mdbTable class="z-depth-1 bg-white">
+        <thead >
+        <tr>
+          <th><strong>ID</strong></th>
+          <th><strong>Shop Name</strong></th>
+          <th><strong>Quantity</strong></th>
+          <th><strong>Total Price</strong></th>
+          <th><strong>Order Progress</strong></th>
+          <th><strong>Order Date</strong></th>
+        </tr>
+        </thead>
+        <tbody #row>
+        <tr mdbTableCol *ngFor="let orderData of orderDatas$ | async |paginate: {
+                                                      itemsPerPage: 5,
+                                                      currentPage: p }; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{orderData.shop_name}}</td>
+          <td>{{orderData.qty}}</td>
+          <td>${{orderData.total_price}}</td>
+          <td>
+            <button mdbBtn type="button" size="sm" color="primary" mdbWavesEffect (click)="basicModal.show()">
+              <mdb-icon fas icon="spinner"></mdb-icon>
+            </button>
+
+            <div mdbModal #basicModal="mdbModal" class="modal fade bottom" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+                 aria-hidden="true">
+              <div class="modal-dialog modal-frame modal-bottom" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title w-100" id="myModalLabel">Order Progress</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="container px-1 px-md-4 py-5 mx-auto">
+                      <div class="card">
+                        <div class="row d-flex justify-content-between px-3 top">
+                          <div class="d-flex">
+                            <h5>Shop Name <span class="text-primary font-weight-bold">{{orderData.shop_name}}</span></h5>
+                          </div>
+                          <div class="d-flex flex-column text-sm-right">
+                            <p class="mb-0">Order Received Date <span>{{orderData.created_at}}</span></p>
+                          </div>
+                        </div> <!-- Add class 'active' to progress -->
+                        <div class="row d-flex justify-content-center">
+                          <div class="col-12">
+                            <ul *ngIf="orderData.order_status == 'Order Processed'" id="progressbar" class="text-center">
+                              <li class="active step0"></li>
+                              <li class=" step0"></li>
+                              <li class=" step0"></li>
+                              <li class=" step0"></li>
+                              <li class=" step0"></li>
+                            </ul>
+
+                            <ul *ngIf="orderData.order_status == 'Order Designing'" id="progressbar" class="text-center">
+                              <li class="active step0"></li>
+                              <li class="active step0"></li>
+                              <li class=" step0"></li>
+                              <li class=" step0"></li>
+                              <li class=" step0"></li>
+                            </ul>
+
+                            <ul *ngIf="orderData.order_status == 'Order Shipped'" id="progressbar" class="text-center">
+                              <li class="active step0"></li>
+                              <li class="active step0"></li>
+                              <li class="active step0"></li>
+                              <li class=" step0"></li>
+                              <li class=" step0"></li>
+                            </ul>
+
+                            <ul *ngIf="orderData.order_status == 'Order En Route'" id="progressbar" class="text-center">
+                              <li class="active step0"></li>
+                              <li class="active step0"></li>
+                              <li class="active step0"></li>
+                              <li class="active step0"></li>
+                              <li class=" step0"></li>
+                            </ul>
+
+                            <ul *ngIf="orderData.order_status == 'Order Arrived'" id="progressbar" class="text-center">
+                              <li class="active step0"></li>
+                              <li class="active step0"></li>
+                              <li class="active step0"></li>
+                              <li class="active step0"></li>
+                              <li class="active step0"></li>
+                            </ul>
+
+                          </div>
+                        </div>
+                        <div class="row justify-content-between top">
+                          <div class="row d-flex icon-content"> <img class="icon" src="https://i.imgur.com/9nnc9Et.png">
+                            <div class="d-flex flex-column">
+                              <p class="font-weight-bold">Order<br>Processed</p>
+                            </div>
+                          </div>
+                          <div class="row d-flex icon-content"><img src="https://img.icons8.com/ios-filled/60/000000/packing.png"/>
+                            <div class="d-flex flex-column">
+                              <p class="font-weight-bold">Order<br>Packaging </p>
+                            </div>
+                          </div>
+                          <div class="row d-flex icon-content"> <img class="icon" src="https://i.imgur.com/u1AzR7w.png">
+                            <div class="d-flex flex-column">
+                              <p class="font-weight-bold">Order<br>Shipped to<br> Delivery service</p>
+                            </div>
+                          </div>
+                          <div class="row d-flex icon-content"> <img class="icon" src="https://i.imgur.com/TkPm63y.png">
+                            <div class="d-flex flex-column">
+                              <p class="font-weight-bold">Order<br>En Route</p>
+                            </div>
+                          </div>
+                          <div class="row d-flex icon-content"> <img class="icon" src="https://i.imgur.com/HdsziHP.png">
+                            <div class="d-flex flex-column">
+                              <p class="font-weight-bold">Order<br>Arrived</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+          </td>
+          <td>{{orderData.created_at}}</td>
+        </tr>
+        </tbody>
+        <tfoot class="lighten-5 w-00">
+        <tr>
+          <td colspan="6" align="center">
+            <pagination-controls
+              maxSize="5"
+              directionLinks="true"
+              responsive="true"
+              previousLabel="Previous"
+              nextLabel="Next"
+              (pageChange)="p = $event">
+
+            </pagination-controls>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+
+    </div>
+  </div>
+
+
+
+
+</div>
+
+
+
