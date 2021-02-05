@@ -9,10 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 @RestController
@@ -23,11 +19,30 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping
-	public ResponseEntity<Response> get() {
-		return ResponseEntity.status(HttpStatus.OK)
-				.body(new Response(userService.get(), new Date()));
-	}
+    @GetMapping
+    public ResponseEntity<Response> get() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new Response(userService.get(), new Date()));
+    }
+    @GetMapping("/banUser")
+    public ResponseEntity<Response> banUser(@RequestParam("slug") String slug, @RequestParam("action") String action) {
+        userService.banUser(slug, action);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new Response(true, new Date()));
+    }
+
+    @GetMapping("/retrieveByID")
+    public ResponseEntity<Response> banUser(@RequestParam("id") int id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new Response(userService.findById(id), new Date()));
+    }
+
+    @GetMapping("/updateProfile")
+    public ResponseEntity<Response> editProfile(@RequestParam("id") int id, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("address") String address, @RequestParam("image") String image) {
+        userService.editUpdate(id,name,email,address,image);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new Response(true, new Date()));
+    }
 
 	@PostMapping
 	public ResponseEntity<Response> save(@RequestBody User user) {

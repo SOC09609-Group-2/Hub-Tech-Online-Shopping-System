@@ -35,7 +35,10 @@ public interface PaymentDetailRepository extends JpaRepository<PaymentDetail, In
     public Collection<CustomerStatusDto> findOrderStatus(@Param("ddate") String ddate, @Param("slug") String slugslug);
 
     @Query(value = "SELECT payment_details.order_no, SUM(qty) as qty, users.name, SUM(total_price) as total_price, payment_details.order_status, payment_details.created_at FROM payment_details INNER JOIN users ON payment_details.supplier_id = users.id WHERE payment_details.date = :ddate AND payment_details.customer_slug = :slug GROUP BY payment_details.created_at,payment_details.supplier_id,payment_details.customer_slug ORDER BY payment_details.created_at DESC" , nativeQuery=true)
-    public Collection<ViewOrderStatusDto> view_order_status(@Param("ddate") String ddate, @Param("slug") String slugslug);
+    public Collection<ViewOrderStatusDto> view_order_status(@Param("ddate") String ddate, @Param("slug") String slug);
+
+    @Query(value = "SELECT users.name, date, SUM(total_price) as total_sale, year, month FROM payment_details INNER JOIN users ON payment_details.supplier_id = users.id GROUP BY payment_details.supplier_id, payment_details.year, payment_details.month ORDER BY total_sale DESC" , nativeQuery=true)
+    public Collection<RevenueDto> view_revenue();
 
     @Modifying
     @Transactional

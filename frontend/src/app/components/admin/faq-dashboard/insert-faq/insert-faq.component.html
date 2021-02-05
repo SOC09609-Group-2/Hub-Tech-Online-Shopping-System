@@ -1,0 +1,48 @@
+<br><br><br><br><br><br>
+<div class="container mt-5">
+
+  <mdb-card>
+    <mdb-card-body>
+      <!--Title-->
+      <mdb-card-title>
+        <h1 align="center" class="text-primary"><strong>Insert FAQ</strong></h1>
+      </mdb-card-title>
+
+
+      <!--Card content-->
+      <div class="card-body px-lg-5">
+
+        <!-- Form -->
+        <form #ifaqForm="ngForm" class="text-center" style="color: #757575;" (ngSubmit)="onCreatefaq(ifaqForm, ifaqForm.value)">
+
+          <!-- Name -->
+          <div class="md-form form-sm mt-3">
+
+            <input mdbInput type="text" id="question" class="form-control form-control-sm" name="question" ngModel>
+            <label for="question" class="">Type Question</label>
+
+          </div>
+
+          <div class="md-form form-sm mt-3">
+            <textarea type="text" id="answer" class="md-textarea md-textarea-auto form-control" mdbInput name="answer" ngModel></textarea>
+            <label for="answer">Type Answer</label>
+
+          </div>
+          <button mdbBtn type="reset" style="color: white" class="float-left" color="warning" mdbWavesEffect>Rest</button>
+
+          <button  mdbBtn type="submit" class="float-right" color="primary" mdbWavesEffect>
+            <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Insert</button>
+
+
+        </form>
+        <!-- Form -->
+
+
+      </div>
+
+    </mdb-card-body>
+  </mdb-card>
+  <!-- Card -->
+
+</div>

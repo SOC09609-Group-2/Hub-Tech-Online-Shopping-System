@@ -55,4 +55,8 @@ public class PaymentDetailService {
     public void updateStatus(String  order_status, String order_no) {
          paymentDetailDAO.updateStatus(order_status, order_no);
     }
+
+    public Collection<RevenueDto> view_revenue() {
+        return paymentDetailDAO.view_revenue();
+    }
 }

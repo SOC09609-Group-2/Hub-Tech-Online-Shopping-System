@@ -1,0 +1,113 @@
+<br><br>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Card -->
+      <mdb-card>
+        <mdb-card-body>
+          <!--Title-->
+          <mdb-card-title>
+            <h1 align="center" *ngIf="isEdit == false" class="text-primary"><strong>Insert Sub Category</strong></h1>
+            <h1 align="center" *ngIf="isEdit == true" class="text-primary"><strong>Update Sub Category</strong></h1>
+          </mdb-card-title>
+
+          <!--Card content-->
+          <div class="card-body px-lg-5">
+            <!-- Form -->
+            <form *ngIf="isEdit==false" #scatForm="ngForm" class="text-center" style="color: #757575;" (ngSubmit)="createSubCat(scatForm, scatForm.value)">
+
+              <!-- Name -->
+              <div class="md-form form-sm mt-3">
+                <input  mdbInput type="text"  class="form-control form-control-sm" name="name" ngModel>
+                <label  class="">Type Sub Category Name</label>
+              </div>
+
+              <button mdbBtn type="submit" style="color: white" class="float-left" color="warning" mdbWavesEffect>Reset</button>
+              <button  mdbBtn type="submit" class="float-right" color="primary" mdbWavesEffect>
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Insert</button>
+
+            </form>
+            <!-- Form -->
+
+            <!-- Form -->
+            <form *ngIf="isEdit==true" #scatForm="ngForm" class="text-center" style="color: #757575;" (ngSubmit)="updateScat(scatForm.value)">
+              <!-- Name -->
+              <div class="md-form form-sm mt-3">
+                <input mdbInput type="hidden" class="form-control form-control-sm" name="id" ngModel="{{editId}}">
+                <input mdbInput type="hidden" class="form-control form-control-sm" name="slug" ngModel="{{editSlug}}">
+                <input mdbInput type="hidden" class="form-control form-control-sm" name="mcat" ngModel="{{ediMcat}}">
+                <input mdbInput type="hidden" class="form-control form-control-sm" name="created_at" ngModel="{{ediCD}}">
+                <input  mdbInput type="text" class="form-control form-control-sm" name="name" ngModel = "{{editName}}">
+                <label  class="">Type Sub Category Name</label>
+              </div>
+
+              <button mdbBtn  type="reset" style="color: white" class="float-left" color="warning"
+                      (click)="cancelEdit(scatForm)" mdbWavesEffect>Cancel</button>
+              <button   mdbBtn type="submit" class="float-right" color="primary" mdbWavesEffect>
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Update</button>
+            </form>
+            <!-- Form -->
+          </div>
+
+        </mdb-card-body>
+      </mdb-card>
+      <!-- Card -->
+    </div>
+  </div>
+
+</div>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-12">
+      <table id="tableSortExample" mdbTable class="z-depth-1 bg-white">
+        <thead>
+        <tr>
+          <th><strong>ID</strong></th>
+          <th><strong>Sub Category Name</strong></th>
+          <th><strong>Created Date</strong></th>
+          <th><strong>Modified Date</strong></th>
+          <th><strong>Action</strong></th>
+        </tr>
+        </thead>
+        <tbody #row>
+        <tr mdbTableCol *ngFor="let scat of scats$ | async |paginate: {
+                                                      itemsPerPage: 3,
+                                                      currentPage: p }; let i = index">
+          <td>{{scat.id}}</td>
+          <td>{{scat.name}}</td>
+          <td>{{dateFormat(scat.created_at)}}</td>
+          <td>{{dateFormat(scat.updated_at)}}</td>
+          <td>
+            <button mdbBtn type="button" size="sm" color="warning" mdbWavesEffect (click)="editScat(scat.id)">
+              <mdb-icon fas icon="edit" ></mdb-icon>
+            </button>
+            <button mdbBtn type="button" size="sm" color="danger" mdbWavesEffect (click)="deleteScat(scat.id)">
+              <mdb-icon fas icon="trash" ></mdb-icon>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+        <tfoot class="lighten-5 w-00">
+        <tr>
+          <td colspan="5" align="center">
+            <pagination-controls
+              maxSize="3"
+              directionLinks="true"
+              responsive="true"
+              previousLabel="Previous"
+              nextLabel="Next"
+              (pageChange)="p = $event">
+
+            </pagination-controls>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+

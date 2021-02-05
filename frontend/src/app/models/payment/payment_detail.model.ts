@@ -13,6 +13,6 @@ export interface Payment_detailModel {
   year?: string;
   month?: string;
   date?: string;
-  created_at?: Date;
+  created_at?: string;
   updated_at?: Date;
 }

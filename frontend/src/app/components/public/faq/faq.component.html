@@ -1,47 +1,87 @@
 <br><br><br>
-<section>
-  <div class="rt-container mt-3">
-    <div class="col-rt-12">
-      <div class="Scriptcontent">
-        <div class="container">
+<!--<section>-->
+<!--  <div class="rt-container mt-3">-->
+<!--    <div class="col-rt-12">-->
+<!--      <div class="Scriptcontent">-->
+<!--        <div class="container">-->
 
-          <!-- START ACCORDION -->
-          <h2 align="center" class="text-primary font-weight-bold">Frequently Ask Questions</h2>
-          <div class="tabs mt-4">
-            <div  class="tab" *ngFor="let faq of faqs$ | async|paginate: {
+<!--          &lt;!&ndash; START ACCORDION &ndash;&gt;-->
+<!--          <h2 align="center" class="text-primary font-weight-bold">Frequently Ask Questions</h2>-->
+<!--          <div class="tabs mt-4">-->
+<!--            <div  class="tab" *ngFor="let faq of faqs$ | async|paginate: {-->
+<!--                                                      itemsPerPage: 10,-->
+<!--                                                      currentPage: p }; let i = index">-->
+<!--              <input type="checkbox" id="chck{{faq.id}}">-->
+<!--              <label class="tab-label" for="chck{{faq.id}}">{{faq.question}}</label>-->
+<!--              <div class="tab-content">-->
+<!--                {{faq.answer}}-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--          </div>-->
+
+<!--          <div class="mt-5">-->
+<!--            <pagination-controls-->
+<!--              maxSize="10"-->
+<!--              directionLinks="true"-->
+<!--              responsive="true"-->
+<!--              previousLabel="Previous"-->
+<!--              nextLabel="Next"-->
+<!--              (pageChange)="p = $event" align="center">-->
+<!--            </pagination-controls>-->
+<!--          </div>-->
+
+<!--        </div>-->
+<!--        &lt;!&ndash;container&ndash;&gt;-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+
+<!--<br>-->
+<!--<br>-->
+<!--<br><br>-->
+
+<!--<br><br>-->
+<!--<br>-->
+<!--<br>-->
+
+<!--<br>-->
+<link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+<h2 align="center" class="text-primary font-weight-bold">Frequently Ask Questions</h2>
+
+<section>
+<div class="row">
+  <div class="col-md-2"></div>
+
+  <div class="col-md-8">
+    <div class="wrapper">
+
+      <div class="parent-tab" *ngFor="let faq of faqs$ | async|paginate: {
                                                       itemsPerPage: 10,
                                                       currentPage: p }; let i = index">
-              <input type="checkbox" id="chck{{faq.id}}">
-              <label class="tab-label" for="chck{{faq.id}}">{{faq.question}}</label>
-              <div class="tab-content">
-                {{faq.answer}}
-              </div>
-            </div>
-
-          </div>
-
-          <div class="mt-5">
-            <pagination-controls
-              maxSize="10"
-              directionLinks="true"
-              responsive="true"
-              previousLabel="Previous"
-              nextLabel="Next"
-              (pageChange)="p = $event" align="center">
-            </pagination-controls>
-          </div>
-
+        <input type="radio" name="tab" id="tab-{{faq.id}}" checked>
+        <label for="tab-{{faq.id}}">
+          <span>{{faq.question}}</span>
+          <div class="icon"><mdb-icon fas icon="plus"></mdb-icon></div>
+        </label>
+        <div class="content">
+          <p>{{faq.answer}}</p>
         </div>
-        <!--container-->
+      </div>
+      <div class="mt-5">
+        <pagination-controls
+          maxSize="10"
+          directionLinks="true"
+          responsive="true"
+          previousLabel="Previous"
+          nextLabel="Next"
+          (pageChange)="p = $event" align="center">
+        </pagination-controls>
       </div>
     </div>
   </div>
+  <div class="col-md-2"></div>
+</div>
 </section>
 
-<br>
-<br>
-<br><br>
-
-<br><br>
-<br>
-<br>

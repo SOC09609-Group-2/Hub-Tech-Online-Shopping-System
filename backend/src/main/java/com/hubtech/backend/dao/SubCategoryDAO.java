@@ -27,5 +27,4 @@ public class SubCategoryDAO {
         return subCategoryRepository.findById(id);
     }
 
-
 }

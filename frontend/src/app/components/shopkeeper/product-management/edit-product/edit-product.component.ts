@@ -77,8 +77,6 @@ export class EditProductComponent implements OnInit, OnDestroy {
     productData.updated_at = this.generateDateTime();
     if (this.subCatID != null || this.subCatID != '0') {
       if (!this.isSelectMcat) {
-        console.log(this.mcatID);
-        console.log(this.subCatID);
         productData.cat_id = Number(this.mcatID);
         productData.sub_cat_id = Number(this.subCatID);
         productData.supplier_id = Number(this.getID());

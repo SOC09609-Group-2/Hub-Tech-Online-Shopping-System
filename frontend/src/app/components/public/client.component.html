@@ -55,9 +55,9 @@
 <!--          <img src="assets/images/{{auth.getImageName()}}" alt="" class="img-fluid rounded-circle z-depth-0" style="width: 30px;height: 30px">-->
         </a>
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-          <a *ngIf="auth.getRole()=='admin'" class="dropdown-item waves-light" mdbWavesEffect routerLink="/admin_dashboard/product_report">Admin Dashboard</a>
+          <a *ngIf="auth.getRole()=='admin'" class="dropdown-item waves-light" mdbWavesEffect routerLink="/admin_dashboard/profile">Admin Dashboard</a>
           <a *ngIf="auth.getRole()=='shopkeeper'" class="dropdown-item waves-light" mdbWavesEffect routerLink="/shopkeeper_dashboard/shopkeeper-report">Shopkeeper Dashboard</a>
-          <a *ngIf="auth.getRole()=='customer'" class="dropdown-item waves-light" mdbWavesEffect routerLink="/customer_dashboard">Customer Dashboard</a>
+          <a *ngIf="auth.getRole()=='customer'" class="dropdown-item waves-light" mdbWavesEffect routerLink="/customer_dashboard/order_history">Customer Dashboard</a>
           <a class="dropdown-item waves-light" mdbWavesEffect href="#" (click)="auth.logout()">Log out</a>
         </div>
       </li>
@@ -97,7 +97,7 @@
           </a>
           <!-- Google +-->
           <a class="gplus-ic">
-            <mdb-icon fab fab icon="google-plus" class="white-text mr-4"></mdb-icon>
+            <mdb-icon fab icon="google-plus" class="white-text mr-4"></mdb-icon>
           </a>
           <!--Linkedin -->
           <a class="li-ic">

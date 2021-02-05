@@ -34,6 +34,17 @@ import { CustomerComponent } from './components/customer/customer.component';
 import { OrderStatusComponent } from './components/customer/order-status/order-status.component';
 import { OrderHistoryComponent } from './components/customer/order-history/order-history.component';
 import { OrderStatusViewComponent } from './components/shopkeeper/order-status-view/order-status-view.component';
+import {SprofileComponent} from './components/shopkeeper/sprofile/sprofile.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { InsertFaqComponent } from './components/admin/faq-dashboard/insert-faq/insert-faq.component';
+import {ViewFaqComponent} from './components/admin/faq-dashboard/view-faq/view-faq.component';
+import {EditFaqComponent} from './components/admin/faq-dashboard/edit-faq/edit-faq.component';
+import {MainCategoryComponent} from './components/admin/category-dashboard/main-category/main-category.component';
+import {SubCategoryComponent} from './components/admin/category-dashboard/sub-category/sub-category.component';
+import {UserManagementComponent} from './components/admin/user-management/user-management.component';
+import {RevenueComponent} from './components/admin/revenue/revenue.component';
+import { ProfileComponent } from './components/admin/profile/profile.component';
+import { CprofileComponent } from './components/customer/cprofile/cprofile.component';
 
 
 
@@ -52,12 +63,27 @@ const appRoutes: Routes = [
       {path: 'product-detail/:slug', component: ProductDetailComponent },
       {path: 'aboutUs', component: AboutUsComponent},
       {path: 'search/:keyword', component: SearchComponent },
-      {path: 'product', component: ProductComponent}
+      {path: 'product', component: ProductComponent},
+      {path: 'payment', component: SprofileComponent}
     ],
-  },  {
+  },   {
+    path: 'admin_dashboard',
+    component: AdminComponent,
+    children: [
+      {path: 'profile', component: ProfileComponent },
+      {path: 'insert_faq', component: InsertFaqComponent },
+      {path: 'view_faq', component: ViewFaqComponent },
+      {path: 'edit_faq/:slug', component: EditFaqComponent },
+      {path: ':id/sub_category', component: SubCategoryComponent },
+      {path: 'user-management', component: UserManagementComponent},
+      {path: 'main_category', component: MainCategoryComponent },
+      {path: 'view_revenue', component: RevenueComponent }
+    ],
+  }, {
     path: 'customer_dashboard',
     component: CustomerComponent,
     children: [
+      {path: 'profile', component: CprofileComponent },
       {path: 'order_status', component: OrderStatusComponent},
       {path: 'order_history', component: OrderHistoryComponent}
     ],
@@ -65,6 +91,7 @@ const appRoutes: Routes = [
     path: 'shopkeeper_dashboard',
     component: ShopkeeperComponent,
     children: [
+      {path: 'profile', component: SprofileComponent },
       {path: 'insert_product', component: InsertProductComponent },
       {path: 'view_order_status', component: OrderStatusViewComponent},
       {path: 'view_products', component: ViewProductsComponent },
@@ -73,7 +100,7 @@ const appRoutes: Routes = [
       {path: 'edit_product/:slug', component: EditProductComponent }
     ],
   },
-  {path: '**', redirectTo: ''}
+  // {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
@@ -103,7 +130,18 @@ const appRoutes: Routes = [
     CustomerComponent,
     OrderStatusComponent,
     OrderHistoryComponent,
-    OrderStatusViewComponent
+    OrderStatusViewComponent,
+    SprofileComponent,
+    AdminComponent,
+    InsertFaqComponent,
+    ViewFaqComponent,
+    EditFaqComponent,
+    MainCategoryComponent,
+    SubCategoryComponent,
+    UserManagementComponent,
+    RevenueComponent,
+    ProfileComponent,
+    CprofileComponent
   ],
   imports: [
     BrowserModule,
