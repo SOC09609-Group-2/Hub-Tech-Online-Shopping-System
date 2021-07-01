@@ -1,17 +1,18 @@
 package com.hubtech.backend.entity;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "faqs")
-public class Faq implements Serializable {
+@Table(name = "contacts")
+public class Contact implements Serializable {
     private static final long serialVersionUID = 1681261145191719508L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String question;
-    private String answer;
-    private String slug;
+    private int sender_id;
+    private int receiver_id;
+    private String text;
     private String created_at;
     private String updated_at;
 
@@ -27,28 +28,28 @@ public class Faq implements Serializable {
         this.id = id;
     }
 
-    public String getQuestion() {
-        return question;
+    public int getSender_id() {
+        return sender_id;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setSender_id(int sender_id) {
+        this.sender_id = sender_id;
     }
 
-    public String getAnswer() {
-        return answer;
+    public int getReceiver_id() {
+        return receiver_id;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setReceiver_id(int receiver_id) {
+        this.receiver_id = receiver_id;
     }
 
-    public String getSlug() {
-        return slug;
+    public String getText() {
+        return text;
     }
 
-    public void setSlug(String slug) {
-        this.slug = slug;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public String getCreated_at() {

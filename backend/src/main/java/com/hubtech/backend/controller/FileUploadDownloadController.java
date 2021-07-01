@@ -14,8 +14,11 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 
 @RestController
@@ -28,11 +31,13 @@ public class FileUploadDownloadController {
 
     @PostMapping(value = "/uploadFile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile[] files) {
+        Date now = new Date();
+        String uniqueNum  = new SimpleDateFormat("yyyyMMddHHmm", Locale.ENGLISH).format(now);
         LinkedList<String> fileNames = new LinkedList<String>();
         for (MultipartFile file: files){
             System.out.println(file.getOriginalFilename());
             String fileName = fileUploadDownloadService.uploadFile(file);
-            fileNames.add(fileName);
+            fileNames.add( uniqueNum + fileName);
         }
         return new UploadFileResponse(fileNames);
     }

@@ -1,9 +1,7 @@
 package com.hubtech.backend.dao;
 
 
-import com.hubtech.backend.entity.MainCategory;
 import com.hubtech.backend.entity.Product;
-import com.hubtech.backend.repository.MainCategoryRepository;
 import com.hubtech.backend.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -35,5 +33,10 @@ public class ProductDAO {
         return productRepository.findByNameContaining(name);
     }
 
-
+    public List<Product> orderByDate() {
+        return productRepository.findNewArrival();
+    }
+    public List<Product> bestSeller() {
+        return productRepository.findBestSeller();
+    }
 }

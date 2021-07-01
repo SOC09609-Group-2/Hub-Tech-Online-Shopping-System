@@ -1,17 +1,16 @@
 package com.hubtech.backend.controller;
 
-import com.hubtech.backend.entity.MainCategory;
-import com.hubtech.backend.entity.PaymentDetail;
 import com.hubtech.backend.model.Response;
-import com.hubtech.backend.service.MainCategoryService;
 import com.hubtech.backend.service.PaymentDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @RestController

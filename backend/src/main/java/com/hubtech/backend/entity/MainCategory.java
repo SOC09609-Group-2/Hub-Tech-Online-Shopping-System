@@ -1,6 +1,7 @@
 package com.hubtech.backend.entity;
 import javax.persistence.*;
 import java.io.Serializable;
+
 @Entity
 @Table(name = "main_categories")
 public class MainCategory implements Serializable {

@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface FaqRepository extends JpaRepository<Faq, Integer> {
-List<Faq> findBySlug(String slug );
+List<Faq> findBySlug(String slug);
 }

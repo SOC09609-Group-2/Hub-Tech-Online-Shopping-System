@@ -1,7 +1,6 @@
 package com.hubtech.backend.service;
 
 import com.hubtech.backend.dao.FaqDAO;
-import com.hubtech.backend.dao.PaymentDAO;
 import com.hubtech.backend.entity.Faq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

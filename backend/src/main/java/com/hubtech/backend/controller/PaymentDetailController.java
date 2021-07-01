@@ -1,18 +1,26 @@
 package com.hubtech.backend.controller;
 
-import com.hubtech.backend.entity.MainCategory;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hubtech.backend.entity.PaymentDetail;
 import com.hubtech.backend.model.Response;
-import com.hubtech.backend.service.MainCategoryService;
 import com.hubtech.backend.service.PaymentDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
-
+import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.thymeleaf.context.Context;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.DataInput;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = "/payment_detail")
@@ -51,9 +59,9 @@ public class PaymentDetailController {
     }
 
     @GetMapping("/view_order_status")
-    public ResponseEntity<Response> view_order_status(@RequestParam("ddate") String ddate, @RequestParam("slug") String slug) throws ParseException {
+    public ResponseEntity<Response> view_order_status(@RequestParam("ddate") String ddate, @RequestParam("id") Integer id) throws ParseException {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(new Response(paymentDetailService.view_order_status(ddate, slug), new Date()));
+                .body(new Response(paymentDetailService.view_order_status(ddate, id), new Date()));
     }
 
     @GetMapping("/updateStatus")
@@ -64,9 +72,10 @@ public class PaymentDetailController {
     }
 
 	@PostMapping
-	public ResponseEntity<Response> save(@RequestBody PaymentDetail paymentDetail) {
-		return ResponseEntity.status(HttpStatus.OK)
+	public ResponseEntity<Response> save(@RequestBody PaymentDetail paymentDetail) throws Exception{
+        return ResponseEntity.status(HttpStatus.OK)
 				.body(new Response(paymentDetailService.save(paymentDetail), new Date()));
+
 	}
 
 	@PutMapping
@@ -81,5 +90,6 @@ public class PaymentDetailController {
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(new Response(true, new Date()));
 	}
+
 
 }

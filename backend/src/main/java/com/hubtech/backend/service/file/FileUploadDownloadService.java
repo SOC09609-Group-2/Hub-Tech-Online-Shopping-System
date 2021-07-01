@@ -34,12 +34,25 @@ public class FileUploadDownloadService {
         try {
             Path fileStorageLocation = Paths.get(env.getProperty("file.upload-dir"))
                     .toAbsolutePath().normalize();
-            newFilename = uniqueNum+fileName;
+            newFilename = uniqueNum + fileName;
             Path targetLocation = fileStorageLocation.resolve(newFilename);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println(newFilename);
         } catch (Exception ex) {
             System.out.println("Exception:" + ex);
         }
+        //File upload to Deployment folder
+        try {
+            Path fileStorageLocation = Paths.get(env.getProperty("file.upload-dir2"))
+                    .toAbsolutePath().normalize();
+            newFilename = uniqueNum + fileName;
+            Path targetLocation = fileStorageLocation.resolve(newFilename);
+            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println(newFilename);
+        } catch (Exception ex) {
+            System.out.println("Exception:" + ex);
+        }
+        //File upload to Deployment folder
         return newFilename;
     }
 

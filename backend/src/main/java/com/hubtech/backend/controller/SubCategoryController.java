@@ -1,9 +1,7 @@
 package com.hubtech.backend.controller;
 
-import com.hubtech.backend.entity.MainCategory;
 import com.hubtech.backend.entity.SubCategory;
 import com.hubtech.backend.model.Response;
-import com.hubtech.backend.service.MainCategoryService;
 import com.hubtech.backend.service.SubCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -2,9 +2,7 @@ package com.hubtech.backend.dao;
 
 
 import com.hubtech.backend.entity.Faq;
-import com.hubtech.backend.entity.Payment;
 import com.hubtech.backend.repository.FaqRepository;
-import com.hubtech.backend.repository.PaymentRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
