@@ -22,8 +22,13 @@ public class ContactDAO {
         return contactRepository.save(contact);
     }
 
-    public Collection<ChatUserDto> getUserList(int sender_id) {
-        Collection<ChatUserDto> list = contactRepository.getUserList(sender_id);
+    public Collection<ChatUserDto> getSenderList(int uid) {
+        Collection<ChatUserDto> list = contactRepository.getSenderList(uid);
+        return list;
+    }
+
+    public Collection<ChatUserDto> getReceiverList(int uid) {
+        Collection<ChatUserDto> list = contactRepository.getReceiverList(uid);
         return list;
     }
 

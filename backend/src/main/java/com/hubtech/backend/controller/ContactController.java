@@ -2,6 +2,7 @@ package com.hubtech.backend.controller;
 
 
 import com.hubtech.backend.entity.Contact;
+import com.hubtech.backend.model.ChatUserDto;
 import com.hubtech.backend.model.Response;
 import com.hubtech.backend.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.Date;
 
 @RestController
@@ -30,10 +32,14 @@ public class ContactController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new Response(contactService.save(contact), new Date()));
     }
-    @GetMapping("/getUserList")
-    public ResponseEntity<Response> view_order_status(@RequestParam("sender_id") int sender_id){
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(new Response(contactService.getUserList(sender_id), new Date()));
+    @GetMapping("/getSenderList")
+    public Collection<ChatUserDto> getSenderList(@RequestParam("uid") int uid){
+        return contactService.getSenderList(uid);
+    }
+
+    @GetMapping("/getReceiverList")
+    public Collection<ChatUserDto> getReceiverList(@RequestParam("uid") int uid){
+        return contactService.getReceiverList(uid);
     }
 //    @SubscribeMapping("/contact/get")
 //    public ResponseEntity<Response> get() {

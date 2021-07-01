@@ -33,7 +33,7 @@ public class MailController {
     private JavaMailSender sender;
 
     @PostMapping
-    public ResponseEntity<Response> save(@RequestParam("oid") String oid, @RequestParam("date") String date, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("address") String address, @RequestParam("totalPrice") Integer totalPrice, @RequestBody ArrayList<Object> paymentDetail) throws Exception{
+    public ResponseEntity<Response> save(@RequestParam("oid") String oid, @RequestParam("date") String date, @RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("address") String address, @RequestParam("totalPrice") Float totalPrice, @RequestBody ArrayList<Object> paymentDetail) throws Exception{
         System.out.println(email);
 
         mailSending(paymentDetail, oid, date, name, email, address, totalPrice);
@@ -42,7 +42,7 @@ public class MailController {
                 .body(new Response(paymentDetail, new Date()));
     }
 
-    private Object mailSending(ArrayList<Object> paymentDetail, String oid, String date, String name, String email, String address, Integer totaolPrice) throws MessagingException, IOException {
+    private Object mailSending(ArrayList<Object> paymentDetail, String oid, String date, String name, String email, String address, Float totaolPrice) throws MessagingException, IOException {
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message,
                 MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
