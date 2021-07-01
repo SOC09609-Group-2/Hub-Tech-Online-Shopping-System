@@ -1,7 +1,6 @@
 package com.hubtech.backend.repository;
 
 import com.hubtech.backend.entity.PaymentDetail;
-import com.hubtech.backend.entity.User;
 import com.hubtech.backend.model.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -11,8 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
-import java.util.Date;
-import java.util.List;
 
 
 @Repository
@@ -29,13 +26,13 @@ public interface PaymentDetailRepository extends JpaRepository<PaymentDetail, In
 
 
     @Query(value = "SELECT payment_details.id,product_name, SUM(qty) as qty, SUM(total_price) as total_price,payment_details.created_at FROM payment_details INNER JOIN users ON payment_details.customer_slug = users.slug WHERE payment_details.date = :ddate AND payment_details.customer_slug = :slug GROUP BY  payment_details.created_at,payment_details.product_id,payment_details.customer_slug ORDER BY payment_details.created_at DESC" , nativeQuery=true)
-    public Collection<CustomerOrderDto> findCustomerOrder(@Param("ddate") String ddate, @Param("slug") String slugslug);
+    public Collection<CustomerOrderDto> findCustomerOrder(@Param("ddate") String ddate, @Param("slug") String slug);
 
     @Query(value = "SELECT payment_details.id, SUM(qty) as qty, users.shop_name, SUM(total_price) as total_price, payment_details.order_status, payment_details.created_at FROM payment_details INNER JOIN users ON payment_details.supplier_id = users.id WHERE payment_details.date = :ddate AND payment_details.customer_slug = :slug GROUP BY payment_details.created_at,payment_details.supplier_id,payment_details.customer_slug ORDER BY payment_details.created_at DESC" , nativeQuery=true)
-    public Collection<CustomerStatusDto> findOrderStatus(@Param("ddate") String ddate, @Param("slug") String slugslug);
+    public Collection<CustomerStatusDto> findOrderStatus(@Param("ddate") String ddate, @Param("slug") String slug);
 
-    @Query(value = "SELECT payment_details.order_no, SUM(qty) as qty, users.name, SUM(total_price) as total_price, payment_details.order_status, payment_details.created_at FROM payment_details INNER JOIN users ON payment_details.supplier_id = users.id WHERE payment_details.date = :ddate AND payment_details.customer_slug = :slug GROUP BY payment_details.created_at,payment_details.supplier_id,payment_details.customer_slug ORDER BY payment_details.created_at DESC" , nativeQuery=true)
-    public Collection<ViewOrderStatusDto> view_order_status(@Param("ddate") String ddate, @Param("slug") String slug);
+    @Query(value = "SELECT payment_details.order_no, SUM(qty) as qty, users.name, SUM(total_price) as total_price, payment_details.order_status, payment_details.created_at FROM payment_details INNER JOIN users ON payment_details.supplier_id = users.id WHERE payment_details.date = :ddate AND payment_details.supplier_id = :id GROUP BY payment_details.created_at,payment_details.supplier_id,payment_details.customer_slug ORDER BY payment_details.created_at DESC" , nativeQuery=true)
+    public Collection<ViewOrderStatusDto> view_order_status(@Param("ddate") String ddate, @Param("id") Integer id);
 
     @Query(value = "SELECT users.name, date, SUM(total_price) as total_sale, year, month FROM payment_details INNER JOIN users ON payment_details.supplier_id = users.id GROUP BY payment_details.supplier_id, payment_details.year, payment_details.month ORDER BY total_sale DESC" , nativeQuery=true)
     public Collection<RevenueDto> view_revenue();

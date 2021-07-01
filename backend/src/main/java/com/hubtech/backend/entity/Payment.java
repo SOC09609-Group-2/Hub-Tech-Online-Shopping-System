@@ -1,9 +1,6 @@
 package com.hubtech.backend.entity;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.sql.Date;
 
 @Entity
 @Table(name = "payments")

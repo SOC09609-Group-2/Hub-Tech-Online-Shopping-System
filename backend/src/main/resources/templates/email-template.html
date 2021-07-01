@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Template</title>
+    <style>
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+        #customers tr:hover {background-color: #ddd;}
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #346aaa;
+            color: white;
+        }
+        .card {
+            margin-left: 100px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            width: 60%;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+        .container {
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div style="background-color: #346aaa">
+        <h1 style="color: white;padding-left: 260px;">Hub Tech Online Shop</h1>
+    </div>
+    <div style="padding-left: 40px;padding-right: 40px; padding-bottom: 100px;">
+
+
+        <div style="width: 50%; float: left;">
+            <table>
+                <tr>
+                    <th colspan="4"><h1 style="color: #346aaa;">INVOICE INFO</h1></th>
+                </tr>
+                <tr>
+                    <td >Invoice Id</td>
+                    <td th:text="${' : '+ oid}"></td>
+                </tr>
+                <tr>
+                    <td >Order Date</td>
+                    <td th:text="${' : '+ date}"></td>
+                </tr>
+                <tr>
+                    <td >Customer Name</td>
+                    <td th:text="${' : '+ name}"></td>
+                </tr>
+
+                <tr>
+                    <td >Customer Email &emsp;&emsp;</td>
+                    <td th:text="${' : '+ email}"></td>
+                </tr>
+                <tr>
+                    <td >Customer Address &emsp;</td>
+                    <td th:text="${' : '+ address}"></td>
+                </tr>
+            </table>
+        </div>
+        <div style="width: 50%; float: right;">
+            <img src="https://firebasestorage.googleapis.com/v0/b/ecommerce-22fea.appspot.com/o/Product%20Images%2Flogo.png?alt=media&token=8d77aca8-9536-4abf-88d6-f80d306d12f2" style="padding-left: 100px; height: 200px;padding-top: 40px;">
+        </div>
+        <h1 style="color: white;">Item List</h1>
+        <table id="customers" >
+            <tr>
+                <th>No</th>
+                <th>Product Name</th>
+                <th>Unit Price</th>
+                <th>Qty</th>
+                <th>Total Price</th>
+            </tr>
+            <tr th:each="productData,id : ${ProjectInfo}" >
+                <td th:text="${id.count}"></td>
+                <td th:text="${productData.name}"> </td>
+                <td th:text="${'$' + productData.price}"> </td>
+                <td th:text="${productData.qty}"> </td>
+                <td th:text="${'$' + productData.totalPrice}"> </td>
+            </tr>
+
+            <tr>
+                <td colspan="3">Total Price</td>
+                <td colspan="2" th:text="${'$' +totalPrice}"></td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+
+
+
+
+
+</body>
+
+</html>

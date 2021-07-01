@@ -12,6 +12,12 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findBySlug(String slug);
 
+    @Query(value = "SELECT * FROM products ORDER BY id DESC LIMIT 6" , nativeQuery=true)
+    List<Product> findNewArrival();
+
+    @Query(value = "SELECT * FROM products INNER JOIN payment_details on products.id = payment_details.product_id GROUP BY payment_details.product_id ORDER BY SUM(payment_details.total_price) DESC LIMIT 6" , nativeQuery=true)
+    List<Product> findBestSeller();
+
     @Query(value = "SELECT * FROM products WHERE cat_id = :cid AND sub_cat_id = :scid" , nativeQuery=true)
     List<Product> findByCatAndScat(@Param("cid") int cid, @Param("scid") int scid);
 

@@ -1,9 +1,6 @@
 package com.hubtech.backend.service;
 
-import com.hubtech.backend.dao.MainCategoryDAO;
-
 import com.hubtech.backend.dao.ProductDAO;
-import com.hubtech.backend.entity.MainCategory;
 import com.hubtech.backend.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,5 +33,12 @@ public class ProductService {
     }
     public List<Product> findByNameContaining(String name) {
         return productDAO.findByNameContaining(name);
+    }
+
+    public List<Product> orderByDate() {
+        return productDAO.orderByDate();
+    }
+    public List<Product> bestSeller() {
+        return productDAO.bestSeller();
     }
 }

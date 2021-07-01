@@ -1,7 +1,6 @@
 package com.hubtech.backend.entity;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @Table(name = "payment_details")

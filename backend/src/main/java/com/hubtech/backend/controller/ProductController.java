@@ -1,9 +1,7 @@
 package com.hubtech.backend.controller;
 
-import com.hubtech.backend.entity.MainCategory;
 import com.hubtech.backend.entity.Product;
 import com.hubtech.backend.model.Response;
-import com.hubtech.backend.service.MainCategoryService;
 import com.hubtech.backend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +24,18 @@ public class ProductController {
 		return ResponseEntity.status(HttpStatus.OK)
                 .body(new Response(productService.get(), new Date()));
 	}
+
+    @GetMapping("/newArrival")
+    public ResponseEntity<Response> newArrival() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new Response(productService.orderByDate(), new Date()));
+    }
+    @GetMapping("/bestSeller")
+    public ResponseEntity<Response> bestSeller() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new Response(productService.bestSeller(), new Date()));
+    }
+
     @GetMapping("/getBySlug")
     public ResponseEntity<Response> getBySlug(@RequestParam("slug") String slug) {
         return ResponseEntity.status(HttpStatus.OK)

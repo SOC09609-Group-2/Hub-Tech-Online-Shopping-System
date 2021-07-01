@@ -1,7 +1,5 @@
 package com.hubtech.backend.model;
 
-import java.util.Date;
-
 public interface ProductYearSaleDto {
     Integer getId();
     String getProduct_name();
