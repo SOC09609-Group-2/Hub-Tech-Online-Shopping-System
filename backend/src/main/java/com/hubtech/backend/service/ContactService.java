@@ -23,7 +23,10 @@ public class ContactService {
         return contactDAO.save(contact);
     }
 
-    public Collection<ChatUserDto> getUserList(int sender_id) {
-        return contactDAO.getUserList(sender_id);
+    public Collection<ChatUserDto> getSenderList(int uid) {
+        return contactDAO.getSenderList(uid);
+    }
+    public Collection<ChatUserDto> getReceiverList(int uid) {
+        return contactDAO.getReceiverList(uid);
     }
 }
