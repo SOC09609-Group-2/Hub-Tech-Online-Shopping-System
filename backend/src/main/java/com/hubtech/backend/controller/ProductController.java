@@ -1,9 +1,7 @@
 package com.hubtech.backend.controller;
 
-import com.hubtech.backend.entity.MainCategory;
 import com.hubtech.backend.entity.Product;
 import com.hubtech.backend.model.Response;
-import com.hubtech.backend.service.MainCategoryService;
 import com.hubtech.backend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,12 +22,34 @@ public class ProductController {
 	@GetMapping
 	public ResponseEntity<Response> get() {
 		return ResponseEntity.status(HttpStatus.OK)
-				.body(new Response(productService.get(), new Date()));
+                .body(new Response(productService.get(), new Date()));
 	}
-    @GetMapping("/{getBySlug}")
+
+    @GetMapping("/newArrival")
+    public ResponseEntity<Response> newArrival() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new Response(productService.orderByDate(), new Date()));
+    }
+    @GetMapping("/bestSeller")
+    public ResponseEntity<Response> bestSeller() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new Response(productService.bestSeller(), new Date()));
+    }
+
+    @GetMapping("/getBySlug")
     public ResponseEntity<Response> getBySlug(@RequestParam("slug") String slug) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new Response(productService.getBySlug(slug), new Date()));
+    }
+    @GetMapping("/fliter")
+    public ResponseEntity<Response> findByCidAndScid(@RequestParam("cid") int cid, @RequestParam("scid") int scid) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new Response(productService.findByCatAndScat(cid, scid), new Date()));
+    }
+  @GetMapping("/search")
+    public ResponseEntity<Response> findByCidAndScid(@RequestParam("name") String name) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new Response(productService.findByNameContaining(name), new Date()));
     }
 
 	@PostMapping

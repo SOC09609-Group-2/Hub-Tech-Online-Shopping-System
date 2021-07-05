@@ -130,7 +130,81 @@
             </div>
 
             <button type="reset" class="float-left" mdbBtn color="warning" mdbWavesEffect>Reset</button>
-            <button type="submit" class="float-right" mdbBtn color="primary" mdbWavesEffect>Sing up</button>
+            <button *ngIf="agreeCustomer"  type="submit" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Sing up</button>
+            <button type="button" class="float-right" mdbBtn color="primary" (click)="basicModal.show()" mdbWavesEffect>Agree Term & Condition</button>
+
+            <div mdbModal #basicModal="mdbModal" class="modal fade bottom" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+                 aria-hidden="true">
+              <div class="modal-dialog modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title w-100" id="myModalLabel" style="color: black">Terms & Conditions for Customer</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p align="justify" style="color: black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      Welcome to our online store! Hub-Tec provide the services to clients to the following
+                      conditions. If you visit the website, you accept these conditions. Please read them
+                      carefully.
+                    </p>
+                    <p align="justify" style="color: black; size: 18px"><strong>COPYRIGHT</strong></p>
+                    <p align="justify" style="color: black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      All content included on this site, such as text, graphics, logos, button icons, images,
+                      audio clips, digital downloads, data compilations and software, is the property of
+                      Hub-Tec or its content suppliers and protected by international copyright laws. The
+                      compilation of all content on this site is the exclusive property of Hub-Tec, with
+                      copyright authorship for this collection by Hub-Tec, and protected by international
+                      copyright laws.
+                    </p>
+
+                    <p align="justify" style="color: black; size: 18px"><strong>YOUR ACCOUNT</strong></p>
+                    <p align="justify" style="color: black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      You may need your own Hub-Tec account to use certain services from hub-tech, and you may be
+                      required to be logged in to the account and have a valid payment method associated
+                      with it. If there is a problem charging your selected payment method, we may charge
+                      any other valid payment method associated with your account. You are responsible for
+                      maintaining the confidentiality of your account and password and for restricting access
+                      to your account, and you agree to accept responsibility for all activities that occur
+                      under your account or password. Hub-Tec reserves the right to refuse service, terminate
+                      accounts, terminate your rights to use services from hub-tech, remove or edit content, or
+                      cancel orders in its sole discretion.
+                    </p>
+
+                    <p align="justify" style="color: black; size: 18px"><strong>RISK of LOSS</strong></p>
+                    <p align="justify" style="color: black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      All items purchased from Hub-Tec are made pursuant to a shipment contract. This basically
+                      means that the risk of loss and title for such items pass to you upon our delivery to
+                      the carrier.
+                    </p>
+
+                    <p align="justify" style="color: black; size: 18px"><strong>PRODUCT DESCRIPTIONS</strong></p>
+                    <p align="justify" style="color: black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      Hub-Tec attempts to be as accurate as possible. However, Hub-Tec does not guarantee that
+                      product descriptions or other content of any Hub-Tec Service is accurate, complete,
+                      reliable, current, or error-free. If a product offered by Hub-Tec itself is not as
+                      described, your sole remedy is to return it in unused condition.
+                    </p>
+
+                    <p align="justify" style="color: black; size: 18px"><strong>APPLICABLE LAW</strong></p>
+                    <p align="justify" style="color: black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      By using Hub-Tec web-app, you agree that the Federal Arbitration Act, applicable federal law,
+                      and the laws of the region of Yangon, without regard to principles of conflict of
+                      laws, will govern these Conditions of Use and any dispute of any sort that might arise
+                      between you and Hub-Tec.
+
+                    </p>
+
+                    <mdb-checkbox [default]="true" (change)="isAgreeCustomer($event)">Agree</mdb-checkbox>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
 
           </form>
           <!-- Form -->
@@ -240,7 +314,10 @@
 
 
             <button type="reset" class="float-left" mdbBtn color="warning" mdbWavesEffect>Reset</button>
-            <button type="submit" class="float-right" mdbBtn color="primary" mdbWavesEffect>Sing up</button>
+            <button *ngIf="agree && !error"   type="submit" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Sing up</button>
+            <button type="button" class="float-right" mdbBtn color="primary" (click)="basicModal.show()" mdbWavesEffect>Agree Term & Condition</button>
+
+
 
           </form>
 
@@ -254,3 +331,79 @@
   </div>
 </div>
 <br><br><br><br>
+
+<div mdbModal #basicModal="mdbModal" class="modal fade bottom" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">Terms & Conditions for ShopKeeper</h4>
+      </div>
+      <div class="modal-body">
+        <p align="justify" style="color: black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Welcome to our online store! Hub-Tec provide the services to clients to the following
+          conditions. If you visit the website, you accept these conditions. Please read them
+          carefully.
+        </p>
+        <p align="justify" style="color: black; size: 18px"><strong>COPYRIGHT</strong></p>
+        <p align="justify" style="color: black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          All content included on this site, such as text, graphics, logos, button icons, images,
+          audio clips, digital downloads, data compilations and software, is the property of
+          Hub-Tec or its content suppliers and protected by international copyright laws. The
+          compilation of all content on this site is the exclusive property of Hub-Tec, with
+          copyright authorship for this collection by Hub-Tec, and protected by international
+          copyright laws.
+        </p>
+
+        <p align="justify" style="color: black; size: 18px"><strong>YOUR ACCOUNT</strong></p>
+        <p align="justify" style="color: black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          You may need your own Hub-Tec account to use certain services from hub-tech, and you may be
+          required to be logged in to the account and have a valid payment method associated
+          with it. If there is a problem charging your selected payment method, we may charge
+          any other valid payment method associated with your account. You are responsible for
+          maintaining the confidentiality of your account and password and for restricting access
+          to your account, and you agree to accept responsibility for all activities that occur
+          under your account or password. Hub-Tec reserves the right to refuse service, terminate
+          accounts, terminate your rights to use services from hub-tech, remove or edit content, or
+          cancel orders in its sole discretion.
+        </p>
+
+        <p align="justify" style="color: black; size: 18px"><strong>OTHER BUSINESS</strong></p>
+        <p align="justify" style="color: black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Parties other than Hub-Tec operate stores, sell products through the Amazon Services.
+          In addition, we provide links to the sites of affiliated companies and certain other
+          businesses. If you purchase any of the products or services offered by these businesses
+          or individuals, you are purchasing directly from those third parties.
+          We are not responsible for examining or evaluating, and we do not warrant, the offerings
+          of any of these businesses or individuals (including the content of their Web sites).
+          Hub-Tec does not assume any responsibility or liability for the actions, product, and
+          content of all these and any other third parties. You should carefully review their
+          privacy statements and other conditions of use.
+        </p>
+
+        <p align="justify" style="color: black; size: 18px"><strong>APPLICABLE LAW</strong></p>
+        <p align="justify" style="color: black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          By using Hub-Tec web-app, you agree that the Federal Arbitration Act, applicable federal law,
+          and the laws of the region of Yangon, without regard to principles of conflict of
+          laws, will govern these Conditions of Use and any dispute of any sort that might arise
+          between you and Hub-Tec.
+        </p>
+        <p align="justify" style="color: black; size: 18px"><strong>Need to Fill Payment Information</strong></p>
+        <div class="row">
+          <div id="card-info" #cardInfo class="col-md-12"></div>
+          <mdb-error *ngIf="error" style="margin-top:960px">{{ error }}</mdb-error>
+        </div>
+        <br><br>
+        <mdb-checkbox [default]="true" (change)="isAgree($event)">Agree</mdb-checkbox>
+        <br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+

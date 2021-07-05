@@ -1,9 +1,7 @@
 package com.hubtech.backend.controller;
 
-import com.hubtech.backend.entity.MainCategory;
 import com.hubtech.backend.entity.SubCategory;
 import com.hubtech.backend.model.Response;
-import com.hubtech.backend.service.MainCategoryService;
 import com.hubtech.backend.service.SubCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,11 +49,5 @@ public class SubCategoryController {
 				.body(new Response(true, new Date()));
 	}
 
-//	@PostMapping("/{reterieve_sc}")
-//	public ResponseEntity<Response> retrieveSCbyMC(@RequestBody SubCategory subCategory) {
-//		int mc_id = subCategory.getMain_category_id();
-//		return ResponseEntity.status(HttpStatus.OK)
-//				.body(new Response(subCategoryService.reterieve_sc(mc_id), new Date()));
-//	}
 
 }

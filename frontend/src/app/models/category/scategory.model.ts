@@ -1,8 +1,8 @@
 export class ScategoryModel {
   public id?: number;
   public name: string;
-  public main_category_id?: number;
+  public mcat?: number;
   public slug?: string;
-  public created_at?: Date;
-  public updated_at?: Date;
+  public created_at?: string;
+  public updated_at?: string;
 }

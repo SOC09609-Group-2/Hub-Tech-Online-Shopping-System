@@ -1,7 +1,6 @@
 package com.hubtech.backend.entity;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @Table(name = "payment_details")
@@ -22,6 +21,7 @@ public class PaymentDetail implements Serializable {
     private String year;
     private String date;
     private String order_no;
+    private String order_status;
     private String updated_at;
     private String created_at;
 
@@ -133,6 +133,14 @@ public class PaymentDetail implements Serializable {
         this.order_no = order_no;
     }
 
+    public String getOrder_status() {
+        return order_status;
+    }
+
+    public void setOrder_status(String order_status) {
+        this.order_status = order_status;
+    }
+
     public String getUpdated_at() {
         return updated_at;
     }
@@ -148,5 +156,4 @@ public class PaymentDetail implements Serializable {
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
     }
-
 }

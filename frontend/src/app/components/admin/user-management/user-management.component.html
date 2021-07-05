@@ -1,0 +1,60 @@
+<br><br><br><br>
+<div class="container mt-4">
+  <h1 class="text-center text-primary font-weight-bold">User Management</h1>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <table id="tableSortExample" mdbTable class="z-depth-1 bg-white">
+        <thead >
+        <tr>
+          <th><strong>ID</strong></th>
+          <th><strong>User Name or Shop Name</strong></th>
+          <th><strong>Email</strong></th>
+          <th><strong>Role</strong></th>
+          <th><strong>Status</strong></th>
+          <th><strong>Action</strong></th>
+        </tr>
+        </thead>
+        <tbody #row>
+        <tr mdbTableCol *ngFor="let user of users$ | async |paginate: {
+                                                      itemsPerPage: 5,
+                                                      currentPage: p }; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{user.role == 'customer'? user.name:user.shop_name}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.role}}</td>
+          <td>
+            <mdb-badge [primary]="user.status == 'active'? true:false" [danger]="user.status != 'active'? true:false">
+              {{user.status}}</mdb-badge>
+            </td>
+          <td *ngIf="user.status == 'active' ">
+            <button type="button" class="float-left" mdbBtn color="danger" mdbWavesEffect size="sm" (click)="banUser(user.slug, 'unactive')">
+              <mdb-icon fas icon="lock"></mdb-icon></button>
+          </td>
+          <td *ngIf="user.status != 'active' ">
+            <button type="button" class="float-left" mdbBtn color="primary" mdbWavesEffect size="sm" (click)="banUser(user.slug, 'active')">
+              <mdb-icon fas icon="lock-open"></mdb-icon></button>
+          </td>
+        </tr>
+        </tbody>
+        <tfoot class="lighten-5 w-00">
+        <tr>
+          <td colspan="6" align="center">
+            <pagination-controls
+              maxSize="5"
+              directionLinks="true"
+              responsive="true"
+              previousLabel="Previous"
+              nextLabel="Next"
+              (pageChange)="p = $event">
+
+            </pagination-controls>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+
+    </div>
+  </div>
+</div>
+

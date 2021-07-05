@@ -1,7 +1,6 @@
 package com.hubtech.backend.model;
 
 import java.util.LinkedList;
-import java.util.List;
 
 public class UploadFileResponse {
     // You may add other file properties like size, file type, etc.

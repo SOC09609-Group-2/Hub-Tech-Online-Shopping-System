@@ -26,7 +26,6 @@ import {ProductSaleReportComponent} from './components/shopkeeper/product-sale-r
 import {HomeComponent} from './components/public/home/home.component';
 import { PasswordPattern2Directive } from './directive/register/password-pattern2.directive';
 import { MatchPasswordDirective } from './directive/register/match-password.directive';
-import {ProductDetailComponent} from './components/public/product-detail/product-detail.component';
 
 
 
@@ -42,13 +41,41 @@ const appRoutes: Routes = [
       {path: 'faq', component: FaqComponent },
       {path: 'product-detail', component: ProductDetailComponent },
       {path: 'contact', component: ContactComponent },
-      {path: 'aboutUs', component: AboutUsComponent}
+      {path: 'addToCart', component: CartProductComponent },
+      {path: 'product-detail/:slug', component: ProductDetailComponent },
+      {path: 'aboutUs', component: AboutUsComponent},
+      {path: 'search/:keyword', component: SearchComponent },
+      {path: 'product', component: ProductComponent},
+      {path: 'payment', component: SprofileComponent}
     ],
-  },  {
+  },   {
+    path: 'admin_dashboard',
+    component: AdminComponent,
+    children: [
+      {path: 'profile', component: ProfileComponent },
+      {path: 'insert_faq', component: InsertFaqComponent },
+      {path: 'view_faq', component: ViewFaqComponent },
+      {path: 'edit_faq/:slug', component: EditFaqComponent },
+      {path: ':id/sub_category', component: SubCategoryComponent },
+      {path: 'user-management', component: UserManagementComponent},
+      {path: 'main_category', component: MainCategoryComponent },
+      {path: 'view_revenue', component: RevenueComponent }
+    ],
+  }, {
+    path: 'customer_dashboard',
+    component: CustomerComponent,
+    children: [
+      {path: 'profile', component: CprofileComponent },
+      {path: 'order_status', component: OrderStatusComponent},
+      {path: 'order_history', component: OrderHistoryComponent}
+    ],
+  }, {
     path: 'shopkeeper_dashboard',
     component: ShopkeeperComponent,
     children: [
+      {path: 'profile', component: SprofileComponent },
       {path: 'insert_product', component: InsertProductComponent },
+      {path: 'view_order_status', component: OrderStatusViewComponent},
       {path: 'view_products', component: ViewProductsComponent },
       {path: 'view_products', component: ViewProductsComponent },
       {path: 'view_order', component: ViewOrderComponent },
@@ -56,7 +83,7 @@ const appRoutes: Routes = [
       {path: 'edit_product/:slug', component: EditProductComponent }
     ],
   },
-  {path: '**', redirectTo: ''}
+  // {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
@@ -79,7 +106,6 @@ const appRoutes: Routes = [
     HomeComponent,
     PasswordPattern2Directive,
     MatchPasswordDirective,
-    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,

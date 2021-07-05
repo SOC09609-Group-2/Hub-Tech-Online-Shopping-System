@@ -23,10 +23,10 @@ export class ProductService {
     return this.http.get(URL_HOST + '/api/product');
   }
   retrievePros(): Observable<any> {
-    return this.http.get(URL_HOST + '/api/view_products');
+    return this.http.get(URL_HOST + '/api/product');
   }
   retrieveStorePros(slug): Observable<any> {
-    return this.http.get(URL_HOST + '/api/retrieve_product/' + slug);
+    return this.http.get(URL_HOST + '/api/product/getBySlug?slug=' + slug);
   }
   editProductView(slug): Observable<any> {
     return this.http.get(URL_HOST + '/api/product/getBySlug?slug=' + slug);
@@ -39,5 +39,10 @@ export class ProductService {
     return this.http.get(URL_HOST + '/api/product_desc');
   }
 
-
+  searchProduct(keyword): Observable<any> {
+    return this.http.get(URL_HOST + '/api/product/search?name=' + keyword);
+  }
+  filterPros(cid, scid): Observable<any> {
+    return this.http.get(URL_HOST + '/api/product/fliter?cid=' + cid + '&scid=' + scid);
+  }
 }

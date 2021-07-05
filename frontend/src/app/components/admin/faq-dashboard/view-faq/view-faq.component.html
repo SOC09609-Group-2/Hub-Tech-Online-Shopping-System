@@ -1,0 +1,55 @@
+<br><br><br><br><br>
+    <div class="container">
+      <h1 class="text-center text-primary font-weight-bold">View FAQ</h1>
+      <br>
+      <div class="row">
+        <table id="tableSortExample" mdbTable class="z-depth-1 bg-white">
+          <thead >
+          <tr>
+            <th><strong>ID</strong></th>
+            <th><strong>View</strong></th>
+            <th><strong>Created Date</strong></th>
+            <th><strong>Modified Date</strong></th>
+            <th><strong>Action</strong></th>
+          </tr>
+          </thead>
+          <tbody #row>
+          <tr mdbTableCol *ngFor="let faq of faqs$ | async |paginate: {
+                                                      itemsPerPage: 5,
+                                                      currentPage: p }; let i = index">
+            <td>{{i + 1}}</td>
+            <td  scope="row">
+              <mdb-icon far icon="eye" (click)="faqModal(faq.question,faq.answer)" style="color: blue; cursor: pointer;"></mdb-icon>
+            </td>
+            <td>{{dateFormat(faq.created_at)}}</td>
+            <td>{{dateFormat(faq.updated_at)}}</td>
+            <td>
+              <button mdbBtn type="button" size="sm" color="warning" mdbWavesEffect (click)="editFaq(faq.slug)">
+                <mdb-icon fas icon="edit" ></mdb-icon>
+              </button>
+              <button mdbBtn type="button" size="sm" color="danger" mdbWavesEffect (click)="deleteFaq(faq.id)">
+                <mdb-icon fas icon="trash" ></mdb-icon>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+          <tfoot class="lighten-5 w-00">
+          <tr>
+            <td colspan="5" align="center">
+              <pagination-controls
+                maxSize="5"
+                directionLinks="true"
+                responsive="true"
+                previousLabel="Previous"
+                nextLabel="Next"
+                (pageChange)="p = $event">
+
+              </pagination-controls>
+            </td>
+          </tr>
+          </tfoot>
+        </table>
+
+      </div>
+    </div>
+

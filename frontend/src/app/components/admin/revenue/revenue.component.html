@@ -1,0 +1,54 @@
+<br><br><br><br>
+<div class="container mt-4">
+  <h1 class="text-center text-primary font-weight-bold">Revenue</h1>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <table id="tableSortExample" mdbTable class="z-depth-1 bg-white">
+        <thead >
+        <tr>
+          <th><strong>ID</strong></th>
+          <th><strong>Shop Name</strong></th>
+          <th><strong>Total Sales</strong></th>
+          <th><strong>Revenue</strong></th>
+          <th><strong>Percentage</strong></th>
+          <th><strong>Year</strong></th>
+          <th><strong>Month</strong></th>
+        </tr>
+        </thead>
+        <tbody #row>
+        <tr mdbTableCol *ngFor="let revenue of revenues$ | async |paginate: {
+                                                      itemsPerPage: 5,
+                                                      currentPage: p }; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{revenue.name}}</td>
+          <td>${{revenue.total_sale}}</td>
+          <td>${{calculateRevenue(revenue.total_sale)}}</td>
+          <td>{{revenuePercentage(revenue.total_sale)}}%</td>
+          <td>{{revenue.year}}</td>
+          <td>{{revenue.month}}</td>
+
+        </tr>
+        </tbody>
+        <tfoot class="lighten-5 w-00">
+        <tr>
+          <td colspan="7" align="center">
+            <pagination-controls
+              maxSize="5"
+              directionLinks="true"
+              responsive="true"
+              previousLabel="Previous"
+              nextLabel="Next"
+              (pageChange)="p = $event">
+
+            </pagination-controls>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+

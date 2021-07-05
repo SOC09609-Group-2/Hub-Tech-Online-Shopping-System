@@ -1,18 +1,24 @@
 package com.hubtech.backend.controller;
 
-import com.hubtech.backend.entity.MainCategory;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hubtech.backend.entity.Payment;
-import com.hubtech.backend.entity.Product;
 import com.hubtech.backend.model.Response;
-import com.hubtech.backend.service.MainCategoryService;
 import com.hubtech.backend.service.PaymentService;
-import com.hubtech.backend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = "/payment")
@@ -23,6 +29,7 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
 
+
     @GetMapping
     public ResponseEntity<Response> get() {
         return ResponseEntity.status(HttpStatus.OK)
@@ -30,7 +37,7 @@ public class PaymentController {
     }
 
     @PostMapping
-    public ResponseEntity<Response> save(@RequestBody Payment payment) {
+    public ResponseEntity<Response> save( @RequestBody Payment payment) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new Response(paymentService.save(payment), new Date()));
     }

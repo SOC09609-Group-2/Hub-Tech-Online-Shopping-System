@@ -1,6 +1,6 @@
 export interface Payment_detailModel {
   id?: number;
-  customerSlug: string;
+  customer_slug: string;
   supplier_id: number;
   payment_id: number;
   qty: number;
@@ -9,9 +9,10 @@ export interface Payment_detailModel {
   unit_price: number;
   total_price: number;
   order_no: string;
+  order_status?: string;
   year?: string;
   month?: string;
   date?: string;
-  created_at?: Date;
+  created_at?: string;
   updated_at?: Date;
 }

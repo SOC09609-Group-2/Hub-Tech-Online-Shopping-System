@@ -1,17 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {AuthenticationService} from '../../../services/login/authentication.service';
 import {UserModel} from '../../../models/Auth/UserModel';
 import {UploadFileService} from '../../../services/UploadFileService ';
+import {AngularStripeService} from '@fireflysemantics/angular-stripe-service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit,  AfterViewInit, OnDestroy {
+  @ViewChild('cardInfo', { static: false }) cardInfo: ElementRef;
+  stripe;
+  loading = false;
+  confirmation;
+
+  card: any;
+  cardHandler = this.onChange.bind(this);
+  error: string;
+
+  agree: boolean;
+  agreeCustomer: boolean;
   userValidation = new UserModel();
   validationError = [];
   isLoading = false;
@@ -21,9 +33,9 @@ export class RegisterComponent implements OnInit {
   fileName;
   generateDateNow: string;
   uniqueSlug: string;
-  error: string = null;
   isCustomer = true;
-  constructor(private auth: AuthenticationService, private uploadService: UploadFileService, private router: Router, private toastr: ToastrService) { }
+  constructor( private cd: ChangeDetectorRef, private stripeService: AngularStripeService,
+               private auth: AuthenticationService, private uploadService: UploadFileService, private router: Router, private toastr: ToastrService) { }
   ngOnInit(): void {
     if (this.auth.isLoggedIn()) {
       this.router.navigate(['']);
@@ -114,4 +126,48 @@ export class RegisterComponent implements OnInit {
       ':' + this.pad2( date.getSeconds() );
     return this.generateDateNow;
   }
+
+  isAgree(event) {
+    this.agree = event.checked;
+  }
+
+  isAgreeCustomer(event) {
+    this.agreeCustomer = event.checked;
+  }
+
+  ngAfterViewInit() {
+    this.stripeService.setPublishableKey('pk_test_2syov9fTMRwOxYG97AAXbOgt008X6NL46o').then(
+      stripe => {
+        this.stripe = stripe;
+        const elements = stripe.elements();
+        this.card = elements.create('card');
+        this.card.mount(this.cardInfo.nativeElement);
+        this.card.addEventListener('change', this.cardHandler);
+      });
+  }
+
+  ngOnDestroy() {
+    this.card.removeEventListener('change', this.cardHandler);
+    this.card.destroy();
+  }
+
+  onChange({ error }) {
+    if (error) {
+      this.error = error.message;
+    } else {
+      this.error = null;
+    }
+    this.cd.detectChanges();
+  }
+
+  async onSubmit(form: NgForm) {
+    const { token, error } = await this.stripe.createToken(this.card);
+
+    if (error) {
+      console.log('Error:', error);
+    } else {
+      console.log('Success!', token);
+    }
+  }
+
 }
