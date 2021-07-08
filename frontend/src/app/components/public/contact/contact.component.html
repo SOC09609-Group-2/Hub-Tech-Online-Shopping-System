@@ -22,7 +22,7 @@
             <mdb-icon fas icon="phone"></mdb-icon> <strong class="ml-5">+959 940 233 332</strong>
           </mdb-card-text>
           <mdb-card-text class="text-primary mt-4">
-            <mdb-icon fas icon="envelope"></mdb-icon> <strong class="ml-5">admin@hubtech.com</strong>
+            <mdb-icon fas icon="envelope"></mdb-icon> <strong class="ml-5">hubtech2022@gmail.com</strong>
           </mdb-card-text>
           <a *ngIf="!auth.isLoggedIn()" routerLink="/login"  color="primary" mdbWavesEffect>Need to login to send message to admin </a>
           <form *ngIf="auth.isLoggedIn()" #contactForm="ngForm" (ngSubmit)="contactForm.form.valid && sendAdmin(contactForm, contactForm.value)">
