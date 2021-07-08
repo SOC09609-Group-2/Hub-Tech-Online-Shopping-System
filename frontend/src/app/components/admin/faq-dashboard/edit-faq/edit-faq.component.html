@@ -1,0 +1,58 @@
+<br><br><br><br><br><br>
+<div class="container mt-5">
+  <!-- Card -->
+  <mdb-card>
+    <mdb-card-body>
+      <!--Title-->
+      <mdb-card-title>
+        <h2 class="text-center text-primary font-weight-bold">Edit FAQ</h2>
+      </mdb-card-title>
+
+
+      <!--Card content-->
+      <div class="card-body px-lg-5">
+        <!-- Form -->
+        <form #ifaqForm="ngForm" *ngFor="let faq of faqs$" class="text-center" style="color: #757575;" (ngSubmit)="ifaqForm.form.valid && updateFaq(ifaqForm.value)">
+
+          <!-- Name -->
+          <div class="md-form  mt-3">
+            <input mdbInput type="hidden" id="id" class="form-control form-control-sm" name="id" ngModel="{{faq.id}}">
+            <input mdbInput type="hidden" id="created_at" class="form-control form-control-sm" name="created_at" ngModel="{{faq.created_at}}">
+            <input mdbInput type="hidden" id="slug" class="form-control form-control-sm" name="slug" ngModel="{{faq.slug}}">
+            <input  #question="ngModel" mdbValidate required mdbInput type="text"   id="question" class="form-control form-control-sm" name="question" ngModel="{{faq.question}}">
+            <label for="question" class="">Type Question</label>
+            <mdb-error>
+   <span class="text-danger"
+         *ngIf="(question.touched || ifaqForm.submitted) && question.errors?.required">
+                                Question is required
+                            </span>
+            </mdb-error>
+          </div>
+
+          <div class="md-form">
+            <textarea #answer="ngModel" mdbValidate required  type="text" id="answer" class="md-textarea md-textarea-auto form-control" mdbInput name="answer" ngModel="{{faq.answer}}"></textarea>
+            <label for="answer">Type Answer</label>
+            <mdb-error>
+   <span class="text-danger"
+         *ngIf="(answer.touched || ifaqForm.submitted) && answer.errors?.required">
+                                Question is required
+                            </span>
+            </mdb-error>
+          </div>
+
+          <button  mdbBtn type="submit" class="float-right" color="primary" mdbWavesEffect>
+            <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Update FAQ</button>
+
+
+        </form>
+        <!-- Form -->
+
+
+      </div>
+
+    </mdb-card-body>
+  </mdb-card>
+  <!-- Card -->
+
+</div>

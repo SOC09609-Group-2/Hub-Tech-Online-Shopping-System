@@ -1,0 +1,60 @@
+<br><br><br><br><br><br>
+<div class="container mt-5">
+
+  <mdb-card>
+    <mdb-card-body>
+      <!--Title-->
+      <mdb-card-title>
+        <h2 align="center" class="text-primary"><strong>Insert FAQ</strong></h2>
+      </mdb-card-title>
+
+
+      <!--Card content-->
+      <div class="card-body px-lg-5">
+
+        <!-- Form -->
+        <form #ifaqForm="ngForm" class="text-center" style="color: #757575;" (ngSubmit)=" ifaqForm.form.valid && onCreatefaq(ifaqForm, ifaqForm.value)">
+
+          <!-- Name -->
+          <div class="md-form form-sm mt-3">
+
+            <input  #question="ngModel" mdbValidate required mdbInput type="text" id="question" class="form-control form-control-sm" name="question" ngModel>
+            <label for="question" class="">Type Question</label>
+            <mdb-error>
+   <span class="text-danger"
+         *ngIf="(question.touched || ifaqForm.submitted) && question.errors?.required">
+                                Question is required
+                            </span>
+            </mdb-error>
+          </div>
+
+          <div class="md-form form-sm mt-3">
+            <textarea #answer="ngModel" mdbValidate required mdbInput
+                      type="text" id="answer" class="md-textarea md-textarea-auto form-control"  name="answer" ngModel></textarea>
+            <label for="answer">Type Answer</label>
+            <mdb-error>
+   <span class="text-danger"
+         *ngIf="(answer.touched || ifaqForm.submitted) && answer.errors?.required">
+                                Answer is required
+                            </span>
+            </mdb-error>
+          </div>
+
+          <button mdbBtn type="reset" style="color: white" class="float-left" color="warning" mdbWavesEffect>Rest</button>
+
+          <button  mdbBtn type="submit" class="float-right" color="primary" mdbWavesEffect>
+            <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Insert</button>
+
+
+        </form>
+        <!-- Form -->
+
+
+      </div>
+
+    </mdb-card-body>
+  </mdb-card>
+  <!-- Card -->
+
+</div>

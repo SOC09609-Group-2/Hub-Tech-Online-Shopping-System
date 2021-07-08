@@ -1,0 +1,108 @@
+<div class="home mt-5">
+    <div class="content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-5" content="text">
+            <br>
+            <br>
+            <br>
+            <br>
+<!--            s-->
+            <br>
+            <h1 style="color: white">Hub Tech Online Shop<br>
+            </h1>
+            <a href="register" style="border-radius: 5px; box-sizing: border-box;"> Join Now</a>
+          </div>
+
+          <div class="col-md-6 content-img">
+            <img src="/assets/images/mobile-img.png">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wave"></div>
+
+  </div>
+<br>
+<div class="container mt-5">
+  <h1 align="center" class="text-primary font-weight-bold">New Arrival Products</h1>
+  <div class="row mt-4 ml-5">
+    <div class="col-md-3 ml-3 mb-5" *ngFor="let product of nproduct$ | async">
+      <mdb-card cascade="true" wider="true">
+
+
+        <div class="view view-cascade overlay waves-light" mdbWavesEffect (click)="viewDetail(product.slug)">
+          <mdb-card-img  src="assets/images/{{getImages(product.image_name)[0]}}" ></mdb-card-img>
+          <a>
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
+
+
+        <mdb-card-body cascade="true" class="text-center pb-0 px-0">
+
+          <h5 class="card-title text-primary">
+            {{product.name}}</h5>
+
+          <h6><mdb-icon fas icon="dollar-sign"></mdb-icon>
+            {{product.price}}</h6>
+
+          <div>
+            <button type="button" (click)="viewDetail(product.slug)"  class="float-left" mdbBtn color="primary" mdbWavesEffect>
+              <mdb-icon fas icon="eye"></mdb-icon></button>
+
+            <button type="button" class="float-right" mdbBtn color="primary" mdbWavesEffect (click)="saveProducts(product.slug)">
+              <mdb-icon fas icon="cart-arrow-down"></mdb-icon></button>
+          </div>
+
+        </mdb-card-body>
+
+
+      </mdb-card>
+
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <h1 align="center" class="text-primary font-weight-bold">Best Arrival Products</h1>
+  <div class="row mt-4 ml-5">
+    <div class="col-md-3 ml-3 mb-5" *ngFor="let product of bproduct$ | async">
+      <mdb-card cascade="true" wider="true">
+
+
+        <div class="view view-cascade overlay waves-light" mdbWavesEffect (click)="viewDetail(product.slug)">
+          <mdb-card-img  src="assets/images/{{getImages(product.image_name)[0]}}" ></mdb-card-img>
+          <a>
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
+
+
+        <mdb-card-body cascade="true" class="text-center pb-0 px-0">
+
+          <h5 class="card-title text-primary">
+            {{product.name}}</h5>
+
+          <h6><mdb-icon fas icon="dollar-sign"></mdb-icon>
+            {{product.price}}</h6>
+
+          <div>
+            <button type="button" (click)="viewDetail(product.slug)"  class="float-left" mdbBtn color="primary" mdbWavesEffect>
+              <mdb-icon fas icon="eye"></mdb-icon></button>
+
+            <button type="button" class="float-right" mdbBtn color="primary" mdbWavesEffect (click)="saveProducts(product.slug)">
+              <mdb-icon fas icon="cart-arrow-down"></mdb-icon></button>
+          </div>
+
+        </mdb-card-body>
+
+
+      </mdb-card>
+
+    </div>
+  </div>
+</div>
+
+

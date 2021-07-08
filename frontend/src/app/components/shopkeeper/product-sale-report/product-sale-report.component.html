@@ -1,0 +1,50 @@
+<br><br>
+<div class="container mt-5">
+  <h2 class="text-center text-primary font-weight-bold" >Product Sales</h2>
+  <div class="row mt-5">
+    <div class="col-6">
+      <mdb-card>
+        <div class="col-12 mt-2">
+          <h2 class="text-center text-primary font-weight-bold">Choice Year</h2>
+          <div style="display: block">
+            <div class="md-form">
+              <select class="browser-default custom-select" (change)="retrieveYearSale($event)">
+                <option *ngFor="let i of years" [selected]="i == curretYear ? true:false" value="{{i}}">{{i}}</option>
+              </select>
+            </div>
+            <canvas mdbChart
+                    [chartType]="chartType"
+                    [datasets]="YearChartDatasets"
+                    [labels]="YearChartLabels"
+                    [colors]="ChartColors"
+                    [options]="ChartOptions">
+            </canvas>
+
+          </div></div>
+      </mdb-card>
+    </div>
+    <div class="col-6">
+      <mdb-card>
+        <div class="col-12 mt-2">
+          <h2 class="text-center text-primary font-weight-bold">Choice Month</h2>
+          <div style="display: block">
+            <div class="md-form">
+              <input type="month" (change)="retrieveMonthlySale($event)" value="{{cYM}}" class="form-control" mdbInput>
+            </div>
+            <canvas mdbChart
+                    [chartType]="chartType"
+                    [datasets]="MonthlyChartDatasets"
+                    [labels]="MonthlyChartLabels"
+                    [colors]="ChartColors"
+                    [options]="ChartOptions">
+            </canvas>
+
+          </div></div>
+      </mdb-card>
+    </div>
+  </div>
+
+</div>
+<!--<br><br><br><br>-->
+<!--<button mdbBtn color="primary" class="waves-light" mdbWavesEffect (click)="retrieveYearSale()">Update only datasets</button>-->
+

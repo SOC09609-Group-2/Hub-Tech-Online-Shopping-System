@@ -1,0 +1,80 @@
+<br><br><br>
+<div class="container mt-5" >
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="card z-depth-5 mt-4">
+        <button type="button"  mdbBtn color="success" mdbWavesEffect>Profile</button>
+        <!--Card content-->
+        <div class="card-body px-lg-5">
+
+          <form #regForm="ngForm"   class="text-center" style="color: #757575;" (ngSubmit)="regForm.form.valid &&updateProfile(regForm.value)">
+
+            <div class="md-form form-sm mt-3">
+              <input type="text" hidden name="id" ngModel="{{user[0]}}">
+              <input mdbInput mdbValidate type="text" id="form1" class="form-control form-control-sm"
+                     #name="ngModel" name="name"  required ngModel="{{user[1]}}">
+              <label for="form1" class="">Name</label>
+              <mdb-error>
+   <span class="text-danger"
+         *ngIf="(name.touched || regForm.submitted) && name.errors?.required">
+                                Name is required
+                            </span>
+              </mdb-error>
+            </div>
+            <div class="md-form form-sm mt-3">
+
+              <input mdbInput mdbValidate type="email" id="form2" class="form-control form-control-sm"
+                     #email="ngModel" required email name="email" ngModel="{{user[2]}}">
+              <label for="form2" class="">Email</label>
+              <mdb-error>
+   <span class="text-danger"
+         *ngIf="(email.touched || regForm.submitted) && email.errors?.required">
+                                Email is required
+                            </span>
+                <span class="text-danger" *ngIf="email.touched && email.errors?.email">
+                                Enter a valid email address
+                            </span>
+              </mdb-error>
+            </div>
+
+            <div class="md-form form-sm mt-3">
+              <input mdbInput type="text" id="form3" class="form-control form-control-sm" name="address"
+                     #address="ngModel" mdbValidate required ngModel="{{user[4]}}">
+              <label for="form3" class="">Address</label>
+              <mdb-error>
+   <span class="text-danger"
+         *ngIf="(address.touched || regForm.submitted) && address.errors?.required">
+                                Address is required
+                            </span>
+              </mdb-error>
+            </div>
+            <div class="md-form form-sm ">
+              <input hidden type="text" name="old_pict" ngModel="{{user[9]}}">
+              <input mdbInput type="file" id="form5" [ngClass]="isSelectFile? 'text-primary':'text-white'"  class="form-control form-control-sm" multiple
+                     #image_name="ngModel"(change)="onFileSeletected($event)" name="image_name" ngModel>
+              <mdb-error>
+   <span class="text-danger"
+         *ngIf="(image_name.touched || regForm.submitted) && !fileName">
+                                At least one file must be choice!
+                            </span>
+              </mdb-error>
+            </div>
+
+            <button type="submit" class="float-center" mdbBtn color="primary" mdbWavesEffect>Update</button>
+
+          </form>
+          <!-- Form -->
+
+
+        </div>
+
+      </div>
+
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>
+<br><br><br><br>
+

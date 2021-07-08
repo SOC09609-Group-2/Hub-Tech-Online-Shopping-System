@@ -1,0 +1,45 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.hubtech.backend.config.WebSocketProperties",
+      "name": "app.websocket",
+      "type": "com.hubtech.backend.config.WebSocketProperties"
+    },
+    {
+      "sourceType": "com.hubtech.backend.config.WebSocketConfiguration",
+      "name": "my-properties",
+      "type": "com.hubtech.backend.config.WebSocketConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.hubtech.backend.config.WebSocketProperties",
+      "defaultValue": [],
+      "name": "app.websocket.allowed-origins",
+      "description": "Allowed origins",
+      "type": "java.lang.String[]"
+    },
+    {
+      "sourceType": "com.hubtech.backend.config.WebSocketProperties",
+      "defaultValue": "\/topic",
+      "name": "app.websocket.application-prefix",
+      "description": "Prefix used for WebSocket destination mappings",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.hubtech.backend.config.WebSocketProperties",
+      "defaultValue": "\/live",
+      "name": "app.websocket.endpoint",
+      "description": "Endpoint that can be used to connect to",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.hubtech.backend.config.WebSocketProperties",
+      "defaultValue": "\/topic",
+      "name": "app.websocket.topic-prefix",
+      "description": "Prefix used by topics",
+      "type": "java.lang.String"
+    }
+  ]
+}

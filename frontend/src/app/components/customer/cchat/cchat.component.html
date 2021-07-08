@@ -1,0 +1,70 @@
+<br>
+
+<div class="container mt-5">
+  <br>
+  <h2 class="text-center text-primary font-weight-bold">Messaging</h2>
+  <br>
+  <div class="messaging">
+    <div class="inbox_msg">
+      <div class="inbox_people">
+        <div class="headind_srch">
+          <div class="recent_heading">
+            <h4>Users</h4>
+          </div>
+
+        </div>
+        <div class="inbox_chat" >
+          <div *ngFor="let userList of userLists" (click)="selectUser(userList.id , userList['image_Name'])">
+            <div [ngClass]="clickUser == userList.id? 'isSelected': 'chat_list'" >
+              <div class="chat_people">
+                <div class="chat_img"> <img src="assets/images/{{userList.image_Name}}" style="border-radius: 50px" alt="sunil"> </div>
+                <div class="chat_ib">
+                  <h5>{{userList.name}}<span class="chat_date">{{userList.role}} </span></h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="mesgs" *ngIf="!isSelectedUser">
+        <label>Please select user to chat </label>
+      </div>
+      <div class="mesgs" *ngIf="isSelectedUser">
+        <div class="msg_history" >
+          <div *ngFor="let chat of chats$ | async">
+            <div class="incoming_msg" *ngIf="chat.sender_id!=authenticationService.getId()">
+              <div class="incoming_msg_img"> <img src="assets/images/{{userImage}}" alt="image not found"
+                                                  style="border-radius: 20px;"> </div>
+              <div class="received_msg">
+                <div class="received_withd_msg">
+                  <p>{{chat.text}}</p>
+                  <span class="time_date"> {{chat.created_at}}</span></div>
+              </div>
+            </div>
+            <div class="outgoing_msg" *ngIf="chat.sender_id==authenticationService.getId()">
+              <div class="sent_msg">
+                <p>{{chat.text}}</p>
+                <span class="time_date"> {{chat.created_at}}</span></div>
+            </div>
+
+
+          </div>
+        </div>
+        <div class="type_msg">
+          <div class="input_msg_write">
+            <form  #contactForm="ngForm" (ngSubmit)="contactForm.form.valid && sendAdmin(contactForm, contactForm.value)">
+              <input type="text" ngModel="1" name="sender_id" hidden>
+              <input type="text" ngModel="1" name="receiver_id" hidden>
+              <input  type="text"  name="text"  class="write_msg" placeholder="Type a message" ngModel />
+
+              <button class="msg_send_btn" type="submit"><mdb-icon fas icon="paper-plane"></mdb-icon></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div></div>
+

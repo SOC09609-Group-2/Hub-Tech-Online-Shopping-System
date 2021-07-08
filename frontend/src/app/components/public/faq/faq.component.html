@@ -1,0 +1,39 @@
+<br><br><br><br>
+<link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+<h2 align="center" class="text-primary font-weight-bold">Frequently Ask Questions</h2>
+<br>
+<section>
+<div class="row">
+  <div class="col-md-2"></div>
+
+  <div class="col-md-8">
+    <div class="wrapper">
+
+      <div class="parent-tab" *ngFor="let faq of faqs$ | async|paginate: {
+                                                      itemsPerPage: 10,
+                                                      currentPage: p }; let i = index">
+        <input type="radio" name="tab" id="tab-{{faq.id}}" checked>
+        <label for="tab-{{faq.id}}">
+          <span>{{faq.question}}</span>
+          <div class="icon"><mdb-icon fas icon="plus"></mdb-icon></div>
+        </label>
+        <div class="content">
+          <p>{{faq.answer}}</p>
+        </div>
+      </div>
+      <div class="mt-5">
+        <pagination-controls
+          maxSize="10"
+          directionLinks="true"
+          responsive="true"
+          previousLabel="Previous"
+          nextLabel="Next"
+          (pageChange)="p = $event" align="center">
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+</section>
+

@@ -1,0 +1,64 @@
+<div class="wrapper">
+  <div class="sidebar">
+    <div class="bg_shadow"></div>
+    <div class="sidebar__inner">
+      <div class="close">
+        <mdb-icon fas icon="times"></mdb-icon>
+      </div>
+      <div class="profile_info">
+        <div class="profile_img">
+<!--          ../../../assets/images/{{auth.getImageName()}}-->
+          <img src="assets/images/{{auth.getImageName()}}" style="border-radius: 50px" alt="profile_img">
+        </div>
+        <div class="profile_data">
+          <p class="name">{{auth.getName()}}</p>
+          <p class="role">{{auth.getRole()}}</p>
+        </div>
+      </div>
+      <ul class="siderbar_menu">
+        <li><a routerLink="/shopkeeper_dashboard/profile" routerLinkActive="active">
+          <span style="font-size: 13px"><strong>PROFILE</strong></span>
+        </a></li>
+        <li><a routerLink="/shopkeeper_dashboard/shopkeeper-report" routerLinkActive="active">
+          <span style="font-size: 13px"><strong>Product Sales Report</strong></span>
+        </a></li>
+        <li><a routerLink="/shopkeeper_dashboard/insert_product" routerLinkActive="active">
+          <span style="font-size: 13px"><strong>Insert Product</strong></span>
+        </a></li>
+        <li><a routerLink="/shopkeeper_dashboard/view_products" routerLinkActive="active">
+          <span style="font-size: 13px"><strong>View Products</strong></span>
+        </a></li>
+        <li><a routerLink="/shopkeeper_dashboard/view_order_status" routerLinkActive="active">
+          <span style="font-size: 13px"><strong>View Order Status</strong></span>
+        </a></li>
+        <li><a routerLink="/shopkeeper_dashboard/view_order" routerLinkActive="active">
+          <span style="font-size: 13px"><strong>View Order</strong></span>
+        </a></li>
+        <li><a routerLink="/shopkeeper_dashboard/schat" routerLinkActive="active">
+          <span style="font-size: 13px"><strong>Chat Box</strong></span>
+        </a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="main_container">
+    <div class="top_navbar">
+      <div class="hamburger">
+        <div class="hamburger__inner">
+          <mdb-icon fas icon="bars"></mdb-icon>
+        </div>
+      </div>
+
+      <ul class="right_bar ml-auto">
+        <li><mdb-icon fas icon="arrow-circle-left" class="text-primary" routerLink="/"></mdb-icon></li>
+      </ul>
+    </div>
+
+    <div class="container-fluid" >
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</div>
+
+
+

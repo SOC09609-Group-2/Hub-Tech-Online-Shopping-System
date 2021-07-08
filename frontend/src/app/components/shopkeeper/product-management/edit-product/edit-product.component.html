@@ -1,0 +1,83 @@
+<br><br><br>
+<div class="container mt-5">
+  <div class="card z-depth-5">
+    <button type="button" mdbBtn color="primary" mdbWavesEffect>Update Product</button>
+    <!--Card content-->
+    <div class="card-body px-lg-5">
+
+      <form #pForm="ngForm" *ngFor="let product of products$"  class="text-center" style="color: #757575;"
+            (ngSubmit)="pForm.form.valid && updateProduct(pForm, pForm.value)" novalidate>
+
+        <div class="md-form form-sm mt-3">
+          <input mdbInput mdbValidate type="email" id="form1" class="form-control form-control-sm" name="name"
+                 #name="ngModel" ngModel="{{product.name}}" required >
+          <label for="form1" class="">Enter Product Name</label>
+          <mdb-error>
+   <span class="text-danger"
+         *ngIf="(name.touched || pForm.submitted) && name.errors?.required">
+                                Product Name is required!
+                            </span>
+          </mdb-error>
+        </div>
+
+        <div class="md-form form-sm mt-3">
+          <input mdbInput mdbValidate type="number" id="form2" class="form-control form-control-sm" name="price"
+                 #price="ngModel" ngModel="{{product.price}}" required>
+          <label for="form2" class="">Enter Product Price</label>
+          <mdb-error>
+   <span class="text-danger"
+         *ngIf="(price.touched || pForm.submitted) && price.errors?.required">
+                                Product Price is required!
+                            </span>
+          </mdb-error>
+        </div>
+
+        <div class="md-form form-sm mt-3">
+          <select class="browser-default custom-select" name="cat_id" (change)="onSelectMcat($event)" >
+            <option  value="{{product.cat_id}}" selected >{{mCatName}}</option>
+            <option *ngFor="let mcat of mcats$ | async"  value="{{mcat.id}}">{{mcat.name}}</option>
+          </select>
+        </div>
+        <div class="md-form form-sm mt-3">
+          <select class="browser-default custom-select" name="sub_cat_id" (click)="onSelectScat($event)">
+            <option *ngIf="!isSelectMcat" value="{{product.sub_cat_id}}" selected>{{sCatName}}</option>
+            <option *ngFor="let scat of scats$ | async" value="{{scat.id}}" >{{scat.name}}</option>
+          </select>
+        </div>
+        <input type="hidden" value="{{getID()}}" name="supplier_id" ngModel>
+        <div class="md-form form-sm ">
+          <input hidden type="text" name="old_pict" ngModel="{{product.image_name}}">
+          <input mdbInput type="file" id="form5" [ngClass]="isSelectFile? 'text-primary':'text-white'"  class="form-control form-control-sm" multiple
+                 #image_name="ngModel"(change)="onFileSeletected($event)" name="image_name" ngModel>
+          <mdb-error>
+   <span class="text-danger"
+         *ngIf="(image_name.touched || pForm.submitted) && !fileName">
+                                At least one file must be choice!
+                            </span>
+          </mdb-error>
+        </div>
+
+        <div class="md-form form-sm mt-3">
+          <textarea mdbValidate type="text" id="form6" class="md-textarea md-textarea-auto form-control"
+                    #content="ngModel" required mdbInput name="content" ngModel="{{product.content}}"></textarea>
+          <label for="form6">Product Description</label>
+          <mdb-error>
+   <span class="text-danger"
+         *ngIf="(content.touched || pForm.submitted) && content.errors?.required">
+                                Product Detail is required!
+                            </span>
+          </mdb-error>
+        </div>
+
+        <button type="reset" class="float-left" mdbBtn color="warning" mdbWavesEffect>Reset</button>
+        <button type="submit" class="float-right" mdbBtn color="primary" mdbWavesEffect>
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          Update Product</button>
+
+      </form>
+      <!-- Form -->
+
+    </div>
+
+  </div>
+</div>

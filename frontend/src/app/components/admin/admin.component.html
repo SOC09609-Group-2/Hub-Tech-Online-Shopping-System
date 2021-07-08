@@ -1,0 +1,64 @@
+<div class="wrapper">
+  <div class="sidebar">
+    <div class="bg_shadow"></div>
+    <div class="sidebar__inner">
+      <div class="close">
+        <mdb-icon fas icon="times"></mdb-icon>
+      </div>
+      <div class="profile_info">
+        <div class="profile_img">
+          <img src="/assets/images/{{auth.getImageName()}}" style="border-radius: 50px" alt="profile_img">
+        </div>
+        <div class="profile_data">
+          <p class="name">{{auth.getName()}}</p>
+          <p class="role">{{auth.getRole()}}</p>
+        </div>
+      </div>
+      <ul class="siderbar_menu">
+        <li><a routerLink="/admin_dashboard/profile" routerLinkActive="active">
+          <span style="font-size: 13px"><strong>Profile</strong></span>
+        </a></li>
+        <li><a routerLink="/admin_dashboard/user-management" routerLinkActive="active">
+          <span style="font-size: 13px"><strong>User Management</strong></span>
+        </a></li>
+        <li><a routerLink="/admin_dashboard/insert_faq" routerLinkActive="active">
+          <span style="font-size: 13px"><strong>Insert Faq</strong></span>
+        </a></li>
+        <li><a routerLink="/admin_dashboard/view_faq" routerLinkActive="active">
+          <span style="font-size: 13px"><strong>View Faqs</strong></span>
+        </a></li>
+        <li><a routerLink="/admin_dashboard/main_category" routerLinkActive="active">
+          <span style="font-size: 13px"><strong>Category Management</strong></span>
+        </a></li>
+        <li><a routerLink="/admin_dashboard/view_revenue" routerLinkActive="active">
+          <span style="font-size: 13px"><strong>Revenue</strong></span>
+        </a></li>
+        <li><a routerLink="/admin_dashboard/achat" routerLinkActive="active">
+          <span style="font-size: 13px"><strong>Chat Box</strong></span>
+        </a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="main_container">
+    <div class="top_navbar">
+      <div class="hamburger">
+        <div class="hamburger__inner">
+          <mdb-icon fas icon="bars"></mdb-icon>
+        </div>
+      </div>
+
+      <ul class="right_bar ml-auto">
+        <li><mdb-icon fas icon="arrow-circle-left" class="text-primary" routerLink="/"></mdb-icon></li>
+      </ul>
+    </div>
+
+    <div class="container-fluid" >
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</div>
+
+
+
+

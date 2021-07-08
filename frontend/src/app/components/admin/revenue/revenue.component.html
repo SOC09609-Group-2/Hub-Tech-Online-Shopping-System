@@ -1,0 +1,84 @@
+<br><br><br><br>
+<div class="container mt-4">
+  <h2 class="text-center text-primary font-weight-bold">Revenue</h2>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <table id="tableSortExample" mdbTable class="z-depth-1 bg-white">
+        <thead >
+        <tr>
+          <th><strong>ID</strong></th>
+          <th><strong>Shop Name</strong></th>
+          <th><strong>Total Sales</strong></th>
+          <th><strong>Revenue</strong></th>
+          <th><strong>Percentage</strong></th>
+          <th><strong>Year</strong></th>
+          <th><strong>Month</strong></th>
+        </tr>
+        </thead>
+        <tbody #row>
+        <tr mdbTableCol *ngFor="let revenue of revenues$ | async |paginate: {
+                                                      itemsPerPage: 5,
+                                                      currentPage: p }; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{revenue.name}}</td>
+          <td>${{revenue.total_sale}}</td>
+          <td>${{calculateRevenue(revenue.total_sale)}}</td>
+          <td>{{revenuePercentage(revenue.total_sale)}}%</td>
+          <td>{{revenue.year}}</td>
+          <td>{{revenue.month}}</td>
+
+        </tr>
+        </tbody>
+        <tfoot class="lighten-5 w-00">
+        <tr>
+          <td colspan="7" align="center">
+            <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show()" mdbWavesEffect>Tax Rate</button>
+            <pagination-controls
+              maxSize="5"
+              directionLinks="true"
+              responsive="true"
+              previousLabel="Previous"
+              nextLabel="Next"
+              (pageChange)="p = $event">
+
+            </pagination-controls>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+
+      <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title w-100" id="myModalLabel">Tax Rate</h4>
+            </div>
+            <div class="modal-body">
+                  <p>
+      <b>If total sale is below $100, tax is 5%</b>
+                    <br>
+      <b>If total sale is over $100 and below $1000, tax is 4%</b>
+                    <br>
+      <b>If total sale is over $1000 and below $10000, tax is 3%</b>
+                    <br>
+      <b>If total sale is over $10000 and below $100000, tax is 2%</b>
+                    <br>
+      <b>If total sale is over $100000, tax is 1%</b>
+                </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
