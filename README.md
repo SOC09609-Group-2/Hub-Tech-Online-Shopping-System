@@ -8,7 +8,7 @@ Firstly install [NodeJs](https://nodejs.org/en/download/) to run angular <br>
 Then need to install http server by using this command `npm install -g http-server` <br>
 Then run `npm install` in frontend folder <br>
 Then run `ng build --prod`, after that dist folder will appear<br>
-And then go to the dist/Hub-Tech by using this command `cd dist/angular-free-demo` 
+And then go to the dist/Hub-Tech by using this command `cd dist/Hub-Tech` 
 and then need to run http server by using this command`http-server -p 4200`
 
 ## Step-2
